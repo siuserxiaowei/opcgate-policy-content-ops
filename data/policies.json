@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "description": "脱敏、最小化的公开政策线索样例。内容用于演示关联，不替代官方原文。",
+    "snapshotAt": "2026-07-23T16:00:00+08:00"
+  },
+  "policies": [
+    {
+      "id": "shenzhen-city-001",
+      "name": "深圳市打造人工智能OPC创业生态引领地行动计划（2026—2027年）",
+      "summary": "深圳市级 OPC 创业生态行动计划；具体支持对象、申请路径与当前有效性仍需回到原文核验。",
+      "themes": ["ai_agent", "policy", "entrepreneurship"],
+      "keywords": ["AI智能体", "人工智能", "创业政策", "初创", "申报"],
+      "sourceType": "government_official",
+      "sourceStatus": "needs_live_recheck",
+      "sourceUrl": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/tzgg/content/post_12602687.html",
+      "updatedAt": "2026-05-06T00:00:00+08:00",
+      "caveat": "行动目标不等于个体可直接申领的补贴；不得据此声称符合资格或可获得资金。"
+    },
+    {
+      "id": "guangdong-province-001",
+      "name": "广东省支持人工智能OPC创新发展行动方案（2026—2028年）",
+      "summary": "省级 OPC 专项行动方案，覆盖算力、空间、场景、融资和人才；地市细则与申报入口需另行核验。",
+      "themes": ["entrepreneurship", "policy", "ai_agent"],
+      "keywords": ["创业", "一人公司", "OPC", "人工智能", "政策", "算力"],
+      "sourceType": "government_official",
+      "sourceStatus": "needs_live_recheck",
+      "sourceUrl": "https://www.cnbayarea.org.cn/policy/policyrelease/policies/content/post_1321436.html",
+      "updatedAt": "2026-04-10T00:00:00+08:00",
+      "caveat": "框架政策不等于统一申请项目；实际事项以属地实施细则和主管部门答复为准。"
+    },
+    {
+      "id": "policy-ai-sme-demo-note",
+      "name": "AI 创业扶持信息核验方法说明",
+      "summary": "本地演示记录：先确认发布机构、适用对象、有效期、金额条件和申报入口，再形成传播稿。",
+      "themes": ["ai_agent", "social_content", "policy"],
+      "keywords": ["AI智能体", "创业政策", "工作流", "微博", "核验"],
+      "sourceType": "offline_demo_sample",
+      "sourceStatus": "unverified",
+      "sourceUrl": null,
+      "updatedAt": "2026-07-23T12:00:00+08:00",
+      "caveat": "内部方法样例，不是政策文件，不能用作事实来源。"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OPC 热点可信解读助手：把手动输入的公开热点文本转成带来源、时效风险和人工核验清单的微博草稿。">
+  <meta name="theme-color" content="#f4efe4">
+  <title>OPC 热点可信解读助手 · VibeSocial</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">跳到分析工作台</a>
+  <header class="masthead">
+    <div class="brand-block">
+      <a class="brand" href="/" aria-label="OPC 热点可信解读助手首页">
+        <span class="brand-mark">核</span>
+        <span><b>OPC 热点可信解读助手</b><small>VibeSocial Evidence Desk</small></span>
+      </a>
+      <p class="issue">NO. 001 · 2026/07/23 · 公开测试版</p>
+    </div>
+    <div class="header-links">
+      <a href="https://github.com/siuserxiaowei/opc-vibesocial-trust-agent" target="_blank" rel="noreferrer">源码 / 复现 ↗</a>
+      <span id="health-badge" class="health-badge">服务检测中</span>
+    </div>
+  </header>
+
+  <div class="truth-ribbon" role="note">
+    <b>真实性边界</b>
+    <span>非实时热搜</span><i>·</i><span>未接微博 API</span><i>·</i><span>不自动抓取</span><i>·</i><span>不自动发博</span><i>·</i><span>政策结论须回原文核验</span>
+  </div>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">#微博VibeLab# · #VibeSocial# · 微博观察家</p>
+        <h1 id="hero-title">热点可以快，<br><em>结论必须慢半拍。</em></h1>
+        <p class="dek">把一段公开热点文本拆成关键词、政策线索、来源等级与时效风险；AI 只在被允许的证据里写草稿，最终由人决定能不能发。</p>
+      </div>
+      <aside class="hero-proof" aria-label="产品事实">
+        <p>本版本事实</p>
+        <dl>
+          <div><dt>02</dt><dd>人工离线样例</dd></div>
+          <div><dt>03</dt><dd>最小政策线索</dd></div>
+          <div><dt id="test-count">12</dt><dd>自动化测试</dd></div>
+          <div><dt>01</dt><dd>人工发布门禁</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="workspace" class="workspace" aria-label="可信热点编辑台">
+      <section class="panel input-panel" aria-labelledby="input-heading">
+        <header class="panel-heading">
+          <span class="step">01</span>
+          <div><p>DESK INPUT</p><h2 id="input-heading">热点输入</h2></div>
+        </header>
+
+        <div class="mode-switch" role="tablist" aria-label="输入方式">
+          <button id="sample-tab" class="mode active" role="tab" aria-selected="true">用内置样例</button>
+          <button id="manual-tab" class="mode" role="tab" aria-selected="false">手动粘贴公开文本</button>
+        </div>
+
+        <div id="sample-fields" class="field-stack">
+          <label for="sample-select">选择明确标注的离线样例</label>
+          <select id="sample-select">
+            <option value="sample-ai-agent-opc-001">AI 智能体 × 一人公司政策</option>
+            <option value="sample-vibe-coding-002">Vibe Coding × 创业工具原型</option>
+          </select>
+          <p class="field-note">样例由作者人工编写，不对应真实博文，也不代表微博实时榜单。</p>
+        </div>
+
+        <div id="manual-fields" class="field-stack" hidden>
+          <label for="topic-title">话题标题 <span>必填</span></label>
+          <input id="topic-title" maxlength="120" placeholder="例：AI 智能体创业讨论升温">
+          <label for="topic-summary">公开文本 / 你的概括 <span>必填</span></label>
+          <textarea id="topic-summary" maxlength="1600" rows="8" placeholder="只粘贴你有权处理的公开文字；不要输入私信、Cookie、身份证号或其他个人敏感信息。"></textarea>
+          <label for="source-url">原始公开链接 <span>可选，仅记录，不自动访问</span></label>
+          <input id="source-url" type="url" placeholder="https://weibo.com/...">
+          <label for="topic-tags">关键词标签 <span>可选，用逗号分隔</span></label>
+          <input id="topic-tags" placeholder="AI智能体, OPC, 创业政策">
+        </div>
+
+        <label class="ai-toggle" for="use-ai">
+          <input id="use-ai" type="checkbox" checked>
+          <span class="switch" aria-hidden="true"></span>
+          <span><b>受约束 AI 改写</b><small>确定性证据先行；模型不得添加政策、金额、资格或背书</small></span>
+        </label>
+        <button id="analyze-button" class="analyze-button"><span>开始可信解读</span><b>→</b></button>
+        <p id="form-error" class="form-error" role="alert" hidden></p>
+      </section>
+
+      <section class="panel analysis-panel" aria-labelledby="analysis-heading" aria-live="polite">
+        <header class="panel-heading">
+          <span class="step">02</span>
+          <div><p>EVIDENCE GATE</p><h2 id="analysis-heading">证据分析</h2></div>
+        </header>
+        <div id="analysis-empty" class="empty-state">
+          <div class="empty-orbit"><span></span><i></i></div>
+          <h3>等待一段值得慢下来的文字</h3>
+          <p>系统将把“匹配线索”与“确定事实”分开，不把相似词直接写成政策资格。</p>
+        </div>
+        <div id="analysis-content" hidden>
+          <div class="score-ledger">
+            <article><small>来源可信度</small><strong id="source-score">—</strong><span>/100</span></article>
+            <article><small>样例时效</small><strong id="freshness-score">—</strong><span>/100</span></article>
+            <article><small>发布风险</small><strong id="risk-score">—</strong><span>/100</span></article>
+          </div>
+          <div class="analysis-section">
+            <div class="section-label"><span>抽取</span><b>关键词与主题</b></div>
+            <div id="keyword-list" class="tag-list"></div>
+          </div>
+          <div class="analysis-section">
+            <div class="section-label"><span>关联</span><b>政策待核验线索</b></div>
+            <div id="policy-list" class="policy-list"></div>
+          </div>
+          <div class="analysis-section">
+            <div class="section-label"><span>警报</span><b>风险与证据缺口</b></div>
+            <ul id="risk-list" class="risk-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel draft-panel" aria-labelledby="draft-heading">
+        <header class="panel-heading">
+          <span class="step">03</span>
+          <div><p>HUMAN REVIEW</p><h2 id="draft-heading">草稿与发布门禁</h2></div>
+        </header>
+        <div id="draft-empty" class="draft-empty">
+          <blockquote>“可信，不是少说话；<br>是让每句话知道自己站在哪里。”</blockquote>
+          <p>这里不会出现“立即发布”按钮。</p>
+        </div>
+        <div id="draft-content" hidden>
+          <div class="draft-meta">
+            <span id="draft-mode" class="draft-mode">确定性草稿</span>
+            <span id="draft-count">0 字</span>
+          </div>
+          <textarea id="draft-text" class="draft-text" rows="13" aria-label="可人工编辑的微博草稿"></textarea>
+          <div class="draft-actions">
+            <button id="copy-button" class="copy-button">复制草稿</button>
+            <span>复制 ≠ 发布，请先完成下方核验</span>
+          </div>
+          <div class="gate-heading"><span>发布前必须逐项确认</span><b id="gate-count">0 / 0</b></div>
+          <div id="checklist" class="checklist"></div>
+          <p class="no-publish">本工具不持有微博登录态、不自动发送内容。最终发布动作始终属于用户本人。</p>
+        </div>
+      </section>
+    </section>
+
+    <section class="methodology" aria-labelledby="method-title">
+      <p class="eyebrow">WORKFLOW / NOT A PROMISE</p>
+      <h2 id="method-title">一条微博草稿，先经过六道慢工序。</h2>
+      <ol>
+        <li><b>输入清洗</b><span>限制长度与协议；不读取链接内容</span></li>
+        <li><b>词义抽取</b><span>可解释规则提取关键词和主题</span></li>
+        <li><b>线索匹配</b><span>只查最小政策快照，不做资格判断</span></li>
+        <li><b>证据分级</b><span>来源、更新时间和缺口分别打分</span></li>
+        <li><b>受约束写作</b><span>AI 只能重写给定证据，失败自动降级</span></li>
+        <li><b>人工门禁</b><span>回到原文核验后，用户手动复制发布</span></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>OPC 热点可信解读助手</b> · VibeSocial 独立衍生原型</p>
+    <p>原项目方法来自 <a href="https://opcgate.com" target="_blank" rel="noreferrer">OPC Gate</a> · <a href="https://github.com/siuserxiaowei/opc-vibesocial-trust-agent" target="_blank" rel="noreferrer">MIT 源码与真实性披露</a></p>
+  </footer>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

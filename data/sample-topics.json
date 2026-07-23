@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "sampleMode": true,
+    "description": "用于本地演示的人工整理、非实时话题样例；不是微博热搜抓取结果。",
+    "createdAt": "2026-07-23T16:00:00+08:00",
+    "rightsNote": "仅保存概括性文字、公开链接和来源类型，不含账号画像、评论、私信或 Cookie。"
+  },
+  "topics": [
+    {
+      "id": "sample-ai-agent-opc-001",
+      "sampleMode": true,
+      "title": "AI 智能体正在帮助一人公司减少政策信息整理时间",
+      "summary": "开发者讨论用智能体把分散的创业扶持政策整理成带来源、时效和待核验项的行动清单。",
+      "tags": ["AI智能体", "OPC", "创业政策", "工作流"],
+      "sourceType": "offline_demo_sample",
+      "sourceStatus": "unverified",
+      "sourceUrl": null,
+      "platformUrl": "https://weibo.com/",
+      "observedAt": "2026-07-22T10:30:00+08:00",
+      "asOf": "2026-07-23T16:00:00+08:00",
+      "provenanceNote": "人工编写的演示话题，用于验证处理流程；不代表当日微博热搜或具体博文。"
+    },
+    {
+      "id": "sample-vibe-coding-002",
+      "sampleMode": true,
+      "title": "Vibe Coding 让非专业开发者更快做出创业工具原型",
+      "summary": "话题关注自然语言开发、快速验证与真实用户工作流，也提醒不要把演示数据包装成生产成绩。",
+      "tags": ["Vibe Coding", "创业", "AI应用"],
+      "sourceType": "offline_demo_sample",
+      "sourceStatus": "unverified",
+      "sourceUrl": null,
+      "platformUrl": "https://weibo.com/",
+      "observedAt": "2026-07-21T09:00:00+08:00",
+      "asOf": "2026-07-23T16:00:00+08:00",
+      "provenanceNote": "人工编写的演示话题，不代表平台实时榜单。"
+    }
+  ]
+}

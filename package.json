@@ -1,0 +1,17 @@
+{
+  "name": "opc-vibesocial-trust-agent",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Evidence-aware social drafting prototype for public AI and entrepreneurship topics.",
+  "type": "module",
+  "scripts": {
+    "demo": "node scripts/demo.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
