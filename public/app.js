@@ -97,6 +97,9 @@ function renderRisks(report, publicationRisk) {
   list.replaceChildren();
   const flags = publicationRisk.flags;
   const messages = flags.length ? flags.map(flag => flag.message) : ["未检测到高风险绝对化措辞，但仍需逐项核验来源。"];
+  if (report.ai?.used && report.ai?.scan?.passed) {
+    messages.push("AI 草稿已通过确定性边界规则扫描；这不等于事实核验或事实白名单。");
+  }
   [...messages, ...report.limitations].forEach(message => {
     const item = document.createElement("li");
     item.textContent = message;
@@ -172,7 +175,7 @@ function render(report) {
   $("#draft-text").value = text;
   $("#draft-count").textContent = `${text.length} 字`;
   const mode = $("#draft-mode");
-  mode.textContent = report.ai?.used ? `受约束 AI · ${report.ai.model.split("/").pop()}` : "确定性降级草稿";
+  mode.textContent = report.ai?.used ? `AI 改写 · 已过规则扫描 · ${report.ai.model.split("/").pop()}` : "确定性降级草稿";
   mode.classList.toggle("fallback", !report.ai?.used);
   if (report.ai?.fallbackReason) {
     const item = document.createElement("li");
@@ -212,6 +215,13 @@ $("#draft-text").addEventListener("input", event => {
   if (checkedBoxes.length) {
     checkedBoxes.forEach(box => { box.checked = false; });
     updateGateCount();
+  }
+});
+
+$("#draft-text").addEventListener("copy", event => {
+  if (!currentGateState().open) {
+    event.preventDefault();
+    showToast("复制已锁定，请先完成全部人工核验项。");
   }
 });
 

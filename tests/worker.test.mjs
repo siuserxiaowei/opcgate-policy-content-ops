@@ -26,7 +26,7 @@ test("analyzes a user-provided topic and falls back without AI binding", async (
 
 test("AI prompt stays evidence-bound and returns scanned text", async () => {
   let captured;
-  const AI = { run: async (model, input) => { captured = { model, input }; return { response: "【非实时样例/手动输入】尚未接入微博 API，不会自动发博。这里是待核验线索。 #微博VibeLab# #VibeSocial#" }; } };
+  const AI = { run: async (model, input) => { captured = { model, input }; return { response: "【非实时样例】尚未接入微博 API，不会自动发博。这里是待核验线索。 #微博VibeLab# #VibeSocial#" }; } };
   const response = await worker.fetch(new Request("https://example.com/api/analyze", {
     method: "POST",
     headers: { "content-type": "application/json" },

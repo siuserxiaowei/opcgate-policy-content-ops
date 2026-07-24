@@ -91,6 +91,10 @@ def run_viewport(browser, name, viewport):
     assert page.locator("#gate-count").inner_text() == f"0 / {total_boxes}"
     assert page.locator("#copy-button").is_disabled()
     assert "复制已锁定" in page.locator("#gate-status").inner_text()
+    locked_copy_prevented = page.locator("#draft-text").evaluate(
+        "el => { const event = new ClipboardEvent('copy', {cancelable: true}); return !el.dispatchEvent(event); }"
+    )
+    assert locked_copy_prevented is True
     review_boxes.first.check()
     assert page.locator("#gate-count").inner_text() == f"1 / {total_boxes}"
 
@@ -99,6 +103,10 @@ def run_viewport(browser, name, viewport):
     assert page.locator("#gate-count").inner_text() == f"{total_boxes} / {total_boxes}"
     assert page.locator("#copy-button").is_enabled()
     assert "可以复制" in page.locator("#gate-status").inner_text()
+    unlocked_copy_prevented = page.locator("#draft-text").evaluate(
+        "el => { const event = new ClipboardEvent('copy', {cancelable: true}); return !el.dispatchEvent(event); }"
+    )
+    assert unlocked_copy_prevented is False
 
     page.locator("#draft-text").fill("人工修改后的草稿")
     assert page.locator("#draft-count").inner_text() == "8 字"

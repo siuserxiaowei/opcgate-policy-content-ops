@@ -137,11 +137,14 @@ export function assessPublicationRisk(text, context = {}) {
 export function scanAIDraft(text, report) {
   const value = String(text ?? "").trim();
   const violations = [];
+  const inputLabelPattern = report?.topic?.userProvided
+    ? /【手动输入(?:待核验)?】/
+    : /【非实时样例(?:\/手动输入)?】/;
   const requireMatch = (code, pattern, message) => {
     if (!pattern.test(value)) violations.push({ code, message });
   };
 
-  requireMatch("missing_input_label", /【(?:非实时样例(?:\/手动输入)?|手动输入(?:待核验)?)】/, "缺少非实时样例或手动输入标识");
+  requireMatch("missing_input_label", inputLabelPattern, "输入类型标识与实际样例/手动输入模式不一致");
   requireMatch("missing_api_boundary", /未接入\s*微博\s*API/i, "缺少未接入微博 API 的边界说明");
   requireMatch("missing_publish_boundary", /(不会自动发博|不自动发博|不自动发布|手动发布)/, "缺少不自动发布或手动发布说明");
   requireMatch("missing_contest_tags", /#微博VibeLab#.*#VibeSocial#|#VibeSocial#.*#微博VibeLab#/s, "缺少完整赛事标签");
