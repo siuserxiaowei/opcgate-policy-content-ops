@@ -8,9 +8,10 @@ const STOP_WORDS = new Set([
 
 const RISK_PATTERNS = [
   { code: "guaranteed_claim", pattern: /(保证|必得|必拿|100%|百分之百|稳赚|零风险)/i, message: "包含保证性或绝对化表述" },
-  { code: "approval_claim", pattern: /(已获批|已经通过审核|官方背书|政府指定|独家认证)/i, message: "可能暗示未经证明的审批或官方背书" },
+  { code: "approval_claim", pattern: /(已获批|已经通过审核|官方背书|政府指定|独家认证|官方推荐)/i, message: "可能暗示未经证明的审批或官方背书" },
+  { code: "qualification_claim", pattern: /(符合(?:申报|申请|补贴)?条件|满足(?:申报|申请)?资格|有资格|可(?:直接)?(?:申领|领取)(?:补贴|奖励|资助)?)/i, message: "可能把待核验线索写成确定资格或可领取结论" },
   { code: "urgency_claim", pattern: /(最后一天|仅剩\d+天|马上截止|今日截止)/i, message: "包含强时效断言，发布前必须回到官方来源核验" },
-  { code: "financial_claim", pattern: /(补贴到账|最高可得|领取\d+[万亿元]|奖励\d+[万亿元])/i, message: "包含金额或到账断言，需逐字核对适用条件" }
+  { code: "financial_claim", pattern: /(补贴到账|最高可得|(?:领取|奖励|补贴|资助)[^，。；\n]{0,12}\d+(?:\.\d+)?\s*(?:万|亿|元|万元|亿元))/i, message: "包含金额或到账断言，需逐字核对适用条件" }
 ];
 
 function clamp(value, min = 0, max = 100) {
@@ -133,6 +134,53 @@ export function assessPublicationRisk(text, context = {}) {
   };
 }
 
+export function scanAIDraft(text, report) {
+  const value = String(text ?? "").trim();
+  const violations = [];
+  const requireMatch = (code, pattern, message) => {
+    if (!pattern.test(value)) violations.push({ code, message });
+  };
+
+  requireMatch("missing_input_label", /【(?:非实时样例(?:\/手动输入)?|手动输入(?:待核验)?)】/, "缺少非实时样例或手动输入标识");
+  requireMatch("missing_api_boundary", /未接入\s*微博\s*API/i, "缺少未接入微博 API 的边界说明");
+  requireMatch("missing_publish_boundary", /(不会自动发博|不自动发博|不自动发布|手动发布)/, "缺少不自动发布或手动发布说明");
+  requireMatch("missing_contest_tags", /#微博VibeLab#.*#VibeSocial#|#VibeSocial#.*#微博VibeLab#/s, "缺少完整赛事标签");
+  if ((report?.linkedPolicies?.length ?? 0) > 0) {
+    requireMatch("missing_evidence_caveat", /待核验(?:线索)?/, "涉及政策线索但缺少待核验提示");
+  }
+
+  const textualRisk = assessPublicationRisk(value, {
+    sourceUrl: "https://example.invalid/source",
+    sourceScore: 100,
+    freshnessScore: 100
+  });
+  for (const flag of textualRisk.flags) {
+    violations.push({ code: flag.code, message: flag.message });
+  }
+
+  const evidenceText = JSON.stringify({
+    topic: report?.topic ?? null,
+    extraction: report?.extraction ?? null,
+    linkedPolicies: report?.linkedPolicies ?? [],
+    limitations: report?.limitations ?? []
+  });
+  const numericClaims = value.match(/\d+(?:\.\d+)?\s*(?:%|％|万元|亿元|元|万|亿)/g) ?? [];
+  for (const claim of unique(numericClaims)) {
+    const compact = claim.replace(/\s+/g, "");
+    if (!evidenceText.replace(/\s+/g, "").includes(compact)) {
+      violations.push({ code: "unsupported_numeric_claim", message: `出现证据上下文中不存在的数字断言：${claim}` });
+    }
+  }
+
+  const deduped = [...new Map(violations.map((item) => [item.code, item])).values()];
+  return {
+    passed: deduped.length === 0,
+    method: "deterministic_boundary_rules",
+    violations: deduped,
+    note: "该扫描检查必需披露、赛事标签和高风险措辞，不等于事实核验或事实白名单。"
+  };
+}
+
 function matchTerms(topicKeywords, themes, policy) {
   const topicTerms = unique([...topicKeywords, ...themes]).map(normalizeText);
   const policyTerms = unique([...(policy.keywords ?? []), ...(policy.themes ?? [])]).map(normalizeText);
@@ -205,7 +253,7 @@ export function buildVerificationChecklist(topic, linkedPolicies, draftRisk) {
     { id: "topic-source", required: true, text: "打开热点原始来源，核对标题、正文、发布时间与上下文", status: "pending", url: topic.sourceUrl ?? null },
     { id: "not-realtime", required: true, text: "保留“非实时样例”标识，不把离线记录描述成当前微博热搜", status: "pending" },
     { id: "privacy", required: true, text: "确认样例不含未授权个人信息、私信、Cookie 或账号凭据", status: "pending" },
-    { id: "claims", required: true, text: "删除无法证明的获批、补贴到账、官方背书和保证性表述", status: draftRisk.flags.some((flag) => ["approval_claim", "guaranteed_claim", "financial_claim"].includes(flag.code)) ? "blocked" : "pending" }
+    { id: "claims", required: true, text: "删除无法证明的获批、资格、补贴到账、官方背书和保证性表述", status: draftRisk.flags.some((flag) => ["approval_claim", "qualification_claim", "guaranteed_claim", "financial_claim"].includes(flag.code)) ? "blocked" : "pending" }
   ];
 
   for (const policy of linkedPolicies) {

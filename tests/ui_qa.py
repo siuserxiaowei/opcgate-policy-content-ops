@@ -86,14 +86,27 @@ def run_viewport(browser, name, viewport):
     assert page.locator("#policy-list .policy-card").count() >= 1
     assert page.locator("#checklist .check-item").count() >= 1
 
-    enabled_boxes = page.locator("#checklist input:not(:disabled)")
-    total_boxes = enabled_boxes.count()
+    review_boxes = page.locator("#checklist input[type='checkbox']")
+    total_boxes = review_boxes.count()
     assert page.locator("#gate-count").inner_text() == f"0 / {total_boxes}"
-    enabled_boxes.first.check()
+    assert page.locator("#copy-button").is_disabled()
+    assert "复制已锁定" in page.locator("#gate-status").inner_text()
+    review_boxes.first.check()
     assert page.locator("#gate-count").inner_text() == f"1 / {total_boxes}"
+
+    for index in range(1, total_boxes):
+        review_boxes.nth(index).check()
+    assert page.locator("#gate-count").inner_text() == f"{total_boxes} / {total_boxes}"
+    assert page.locator("#copy-button").is_enabled()
+    assert "可以复制" in page.locator("#gate-status").inner_text()
 
     page.locator("#draft-text").fill("人工修改后的草稿")
     assert page.locator("#draft-count").inner_text() == "8 字"
+    assert page.locator("#gate-count").inner_text() == f"0 / {total_boxes}"
+    assert page.locator("#copy-button").is_disabled()
+    for index in range(total_boxes):
+        review_boxes.nth(index).check()
+    assert page.locator("#copy-button").is_enabled()
     page.evaluate("navigator.clipboard.writeText = async () => undefined")
     page.locator("#copy-button").click()
     page.locator("#toast").wait_for(state="visible")
@@ -108,7 +121,8 @@ def run_viewport(browser, name, viewport):
     page.locator("#analyze-button").click()
     page.wait_for_function("document.querySelector('#draft-text').value.includes('非实时样例解读')")
     assert page.locator("#risk-score").inner_text() == "48"
-    assert page.locator("#checklist .blocked input:disabled").count() >= 1
+    assert page.locator("#checklist .blocked input").count() >= 1
+    assert page.locator("#copy-button").is_disabled()
     page.screenshot(path=str(ARTIFACTS / f"{name}-sample-result.png"), full_page=True)
     sample_dimensions = assert_no_horizontal_overflow(page)
 

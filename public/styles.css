@@ -167,13 +167,16 @@ textarea { resize: vertical; line-height: 1.65; }
 .draft-text { min-height: 280px; background: var(--white); border: 1px solid var(--ink); font: 500 14px/1.8 var(--serif); }
 .draft-actions { display: flex; align-items: center; gap: 12px; margin: 11px 0 24px; }
 .copy-button { padding: 11px 16px; }
+.copy-button:disabled { background: #8a857b; cursor: not-allowed; opacity: .72; }
 .draft-actions span { color: var(--muted); font-size: 10px; line-height: 1.4; }
+.draft-actions span.open { color: var(--green); font-weight: 800; }
 .gate-heading { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 3px double var(--ink); border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 800; }
 .checklist { display: grid; }
 .check-item { display: grid; grid-template-columns: 20px 1fr; gap: 9px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 11px; line-height: 1.5; }
 .check-item input { width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--green); }
 .check-item.blocked { color: var(--red-dark); }
 .check-item a { display: block; margin-top: 3px; color: var(--red-dark); }
+.check-warning { display: block; margin-top: 4px; color: var(--red-dark); font-size: 9px; font-weight: 800; }
 .no-publish { margin: 18px 0 0; padding: 11px; border: 1px solid var(--red); color: var(--red-dark); font-size: 10px; line-height: 1.5; }
 
 .methodology { padding: 80px 0 100px; border-bottom: 3px double var(--ink); }

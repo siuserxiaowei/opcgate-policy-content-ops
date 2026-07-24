@@ -34,14 +34,14 @@
       <div class="hero-copy">
         <p class="eyebrow">#微博VibeLab# · #VibeSocial# · 微博观察家</p>
         <h1 id="hero-title">热点可以快，<br><em>结论必须慢半拍。</em></h1>
-        <p class="dek">把一段公开热点文本拆成关键词、政策线索、来源等级与时效风险；AI 只在被允许的证据里写草稿，最终由人决定能不能发。</p>
+        <p class="dek">把一段公开热点文本拆成关键词、政策线索、来源等级与时效风险；AI 接收最小证据上下文和禁止项提示，输出仍须经过规则扫描与人工核验。</p>
       </div>
       <aside class="hero-proof" aria-label="产品事实">
         <p>本版本事实</p>
         <dl>
           <div><dt>02</dt><dd>人工离线样例</dd></div>
           <div><dt>03</dt><dd>最小政策线索</dd></div>
-          <div><dt id="test-count">12</dt><dd>自动化测试</dd></div>
+          <div><dt id="test-count">15</dt><dd>自动化测试</dd></div>
           <div><dt>01</dt><dd>人工发布门禁</dd></div>
         </dl>
       </aside>
@@ -82,7 +82,7 @@
         <label class="ai-toggle" for="use-ai">
           <input id="use-ai" type="checkbox" checked>
           <span class="switch" aria-hidden="true"></span>
-          <span><b>受约束 AI 改写</b><small>确定性证据先行；模型不得添加政策、金额、资格或背书</small></span>
+          <span><b>提示词约束 AI 改写</b><small>模型收到最小证据与禁止项；输出仍可能出错，并会接受规则后扫</small></span>
         </label>
         <button id="analyze-button" class="analyze-button"><span>开始可信解读</span><b>→</b></button>
         <p id="form-error" class="form-error" role="alert" hidden></p>
@@ -135,8 +135,8 @@
           </div>
           <textarea id="draft-text" class="draft-text" rows="13" aria-label="可人工编辑的微博草稿"></textarea>
           <div class="draft-actions">
-            <button id="copy-button" class="copy-button">复制草稿</button>
-            <span>复制 ≠ 发布，请先完成下方核验</span>
+            <button id="copy-button" class="copy-button" disabled aria-disabled="true">复制草稿</button>
+            <span id="gate-status" role="status">复制已锁定：请先完成下方全部核验</span>
           </div>
           <div class="gate-heading"><span>发布前必须逐项确认</span><b id="gate-count">0 / 0</b></div>
           <div id="checklist" class="checklist"></div>
@@ -153,8 +153,8 @@
         <li><b>词义抽取</b><span>可解释规则提取关键词和主题</span></li>
         <li><b>线索匹配</b><span>只查最小政策快照，不做资格判断</span></li>
         <li><b>证据分级</b><span>来源、更新时间和缺口分别打分</span></li>
-        <li><b>受约束写作</b><span>AI 只能重写给定证据，失败自动降级</span></li>
-        <li><b>人工门禁</b><span>回到原文核验后，用户手动复制发布</span></li>
+        <li><b>提示词约束写作</b><span>提供最小证据与禁止项，输出再做规则扫描</span></li>
+        <li><b>人工门禁</b><span>全部核验项完成后，才允许手动复制</span></li>
       </ol>
     </section>
   </main>

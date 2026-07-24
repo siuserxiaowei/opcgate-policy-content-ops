@@ -36,8 +36,24 @@ test("AI prompt stays evidence-bound and returns scanned text", async () => {
   assert.equal(body.ai.used, true);
   assert.match(captured.input.messages[1].content, /不得补充政策金额/);
   assert.match(body.ai.text, /#VibeSocial#/);
+  assert.equal(body.ai.scan.passed, true);
   assert.ok(body.ai.risk);
   assert.ok(body.ai.risk.flags.some((flag) => flag.code === "missing_source"));
+});
+
+test("AI output that fails deterministic boundary scanning falls back", async () => {
+  const AI = { run: async () => ({ response: "官方推荐，符合申报条件，最高可得 100 万元。" }) };
+  const response = await worker.fetch(new Request("https://example.com/api/analyze", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ sampleId: "sample-ai-agent-opc-001", useAI: true })
+  }), { ASSETS, AI });
+  const body = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(body.ai.used, false);
+  assert.equal(body.ai.scan.passed, false);
+  assert.match(body.ai.fallbackReason, /确定性边界扫描/);
+  assert.match(body.ai.text, /非实时样例解读/);
 });
 
 test("rejects unsupported or oversized inputs", async () => {

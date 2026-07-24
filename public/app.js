@@ -1,3 +1,5 @@
+import { evaluatePublicationGate } from "./gate.js";
+
 const $ = (selector) => document.querySelector(selector);
 const state = { mode: "sample", report: null };
 
@@ -110,10 +112,18 @@ function renderChecklist(report) {
     label.className = `check-item${item.status === "blocked" ? " blocked" : ""}`;
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.disabled = item.status === "blocked";
+    checkbox.dataset.required = String(item.required !== false);
+    checkbox.dataset.reviewStatus = item.status;
+    checkbox.setAttribute("aria-label", item.text);
     checkbox.addEventListener("change", updateGateCount);
     const content = document.createElement("span");
     content.textContent = item.text;
+    if (item.status === "blocked") {
+      const warning = document.createElement("small");
+      warning.className = "check-warning";
+      warning.textContent = "检测到风险：完成修正或确认仅作演示后再勾选";
+      content.append(warning);
+    }
     if (item.url) content.append(safeLink(item.url, "核验来源 ↗"));
     label.append(checkbox, content);
     container.append(label);
@@ -121,9 +131,25 @@ function renderChecklist(report) {
   updateGateCount();
 }
 
+function currentGateState() {
+  const items = [...document.querySelectorAll("#checklist input[type='checkbox']")].map(box => ({
+    required: box.dataset.required !== "false",
+    checked: box.checked
+  }));
+  return evaluatePublicationGate(items);
+}
+
 function updateGateCount() {
-  const boxes = [...document.querySelectorAll("#checklist input:not(:disabled)")];
-  $("#gate-count").textContent = `${boxes.filter(box => box.checked).length} / ${boxes.length}`;
+  const gate = currentGateState();
+  $("#gate-count").textContent = `${gate.completed} / ${gate.total}`;
+  const copyButton = $("#copy-button");
+  copyButton.disabled = !gate.open;
+  copyButton.setAttribute("aria-disabled", String(!gate.open));
+  const status = $("#gate-status");
+  status.textContent = gate.open
+    ? "核验项已完成，可以复制；复制仍不等于发布"
+    : `复制已锁定：还需确认 ${Math.max(0, gate.total - gate.completed)} 项`;
+  status.classList.toggle("open", gate.open);
 }
 
 function render(report) {
@@ -182,15 +208,24 @@ analyzeButton.addEventListener("click", async () => {
 
 $("#draft-text").addEventListener("input", event => {
   $("#draft-count").textContent = `${event.target.value.length} 字`;
+  const checkedBoxes = [...document.querySelectorAll("#checklist input:checked")];
+  if (checkedBoxes.length) {
+    checkedBoxes.forEach(box => { box.checked = false; });
+    updateGateCount();
+  }
 });
 
 $("#copy-button").addEventListener("click", async () => {
+  if (!currentGateState().open) {
+    showToast("复制已锁定，请先完成全部人工核验项。");
+    return;
+  }
   try {
     await navigator.clipboard.writeText($("#draft-text").value);
-    showToast("草稿已复制；请完成来源核验后再手动发布。 ");
+    showToast("草稿已复制；请由本人再次确认后手动发布。 ");
   } catch {
     $("#draft-text").select();
-    showToast("已选中草稿，请手动复制。 ");
+    showToast("核验已完成，草稿已选中，请手动复制。 ");
   }
 });
 

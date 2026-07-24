@@ -1,4 +1,4 @@
-import { analyzeTopic, assessPublicationRisk } from "./src/core.js";
+import { analyzeTopic, assessPublicationRisk, scanAIDraft } from "./src/core.js";
 import topicsData from "./data/sample-topics.json" with { type: "json" };
 import policiesData from "./data/policies.json" with { type: "json" };
 
@@ -105,12 +105,24 @@ async function handleAnalyze(request, env) {
         });
         const text = cleanText(result?.response ?? result?.result?.response, 1200);
         if (text) {
-          const risk = assessPublicationRisk(text, {
-            sourceUrl: report.topic.sourceUrl,
-            sourceScore: report.scoring.source.score,
-            freshnessScore: report.scoring.freshness.score
-          });
-          ai = { used: true, model: MODEL, text, risk, fallbackReason: null };
+          const scan = scanAIDraft(text, report);
+          if (scan.passed) {
+            const risk = assessPublicationRisk(text, {
+              sourceUrl: report.topic.sourceUrl,
+              sourceScore: report.scoring.source.score,
+              freshnessScore: report.scoring.freshness.score
+            });
+            ai = { used: true, model: MODEL, text, risk, scan, fallbackReason: null };
+          } else {
+            ai = {
+              used: false,
+              model: MODEL,
+              text: report.draft.text,
+              risk: report.draft.risk,
+              scan,
+              fallbackReason: `AI 输出未通过确定性边界扫描，已降级为确定性草稿：${scan.violations.map(item => item.code).join(", ")}`
+            };
+          }
         }
       } catch (error) {
         ai = { used: false, model: MODEL, text: report.draft.text, fallbackReason: `AI 暂不可用，已降级为确定性草稿：${cleanText(error?.message, 120)}` };

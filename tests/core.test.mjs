@@ -6,6 +6,7 @@ import {
   assessPublicationRisk,
   extractKeywords,
   linkPolicies,
+  scanAIDraft,
   scoreFreshness,
   scoreSource
 } from "../src/core.js";
@@ -48,6 +49,18 @@ test("flags unsupported approval and guarantee claims", () => {
   assert.equal(risk.level, "high");
   assert.ok(risk.flags.some((flag) => flag.code === "approval_claim"));
   assert.ok(risk.flags.some((flag) => flag.code === "guaranteed_claim"));
+});
+
+test("deterministic AI scan rejects unsupported claims and missing boundaries", () => {
+  const report = analyzeTopic(topics[0], policies);
+  const result = scanAIDraft("官方推荐，符合申报条件，最高可得 100 万元。", report);
+  assert.equal(result.passed, false);
+  assert.equal(result.method, "deterministic_boundary_rules");
+  assert.ok(result.violations.some((item) => item.code === "approval_claim"));
+  assert.ok(result.violations.some((item) => item.code === "qualification_claim"));
+  assert.ok(result.violations.some((item) => item.code === "unsupported_numeric_claim"));
+  assert.ok(result.violations.some((item) => item.code === "missing_api_boundary"));
+  assert.match(result.note, /不等于事实核验或事实白名单/);
 });
 
 test("produces the complete offline sample to draft to verification loop", () => {
