@@ -1,7 +1,8 @@
 # VibeSocial 投稿包（发布前草稿）
 
 核验日期：2026-07-24（北京时间）  
-对应源码提交：`31d32a8`  
+功能源码提交：`31d32a8`  
+投稿包提交：`91f1125`  
 线上版本：Cloudflare Worker Version `fac9fb58-7631-4c8c-b1ca-6facec024dc6`
 
 ## 官方参与要求
