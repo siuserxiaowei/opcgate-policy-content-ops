@@ -4,4 +4,10 @@ node_modules/
 *.log
 .DS_Store
 test-results/
+!test-results/
+test-results/*
+!test-results/ui-qa/
+test-results/ui-qa/*
+!test-results/ui-qa/REPORT.md
+!test-results/ui-qa/report.json
 playwright-report/

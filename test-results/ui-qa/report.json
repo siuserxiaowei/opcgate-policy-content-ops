@@ -1,0 +1,137 @@
+{
+  "baseUrl": "http://127.0.0.1:8787",
+  "desktop": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "initialHiddenState": {
+      "sampleFields": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "manualFields": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "analysisEmpty": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "analysisContent": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "draftEmpty": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "draftContent": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "toast": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      }
+    },
+    "initialDimensions": {
+      "innerWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "documentScrollWidth": 1440
+    },
+    "resultDimensions": {
+      "innerWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "documentScrollWidth": 1440
+    },
+    "sampleDimensions": {
+      "innerWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "documentScrollWidth": 1440
+    },
+    "manualPolicyCards": 3,
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "screenshots": [
+      "test-results/ui-qa/desktop-1440x1000-initial.png",
+      "test-results/ui-qa/desktop-1440x1000-manual-result.png",
+      "test-results/ui-qa/desktop-1440x1000-sample-result.png"
+    ]
+  },
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "initialHiddenState": {
+      "sampleFields": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "manualFields": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "analysisEmpty": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "analysisContent": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "draftEmpty": {
+        "hidden": false,
+        "display": "grid",
+        "visible": true
+      },
+      "draftContent": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      },
+      "toast": {
+        "hidden": true,
+        "display": "none",
+        "visible": false
+      }
+    },
+    "initialDimensions": {
+      "innerWidth": 390,
+      "bodyScrollWidth": 390,
+      "documentScrollWidth": 390
+    },
+    "resultDimensions": {
+      "innerWidth": 390,
+      "bodyScrollWidth": 390,
+      "documentScrollWidth": 390
+    },
+    "sampleDimensions": {
+      "innerWidth": 390,
+      "bodyScrollWidth": 390,
+      "documentScrollWidth": 390
+    },
+    "manualPolicyCards": 3,
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "screenshots": [
+      "test-results/ui-qa/mobile-390x844-initial.png",
+      "test-results/ui-qa/mobile-390x844-manual-result.png",
+      "test-results/ui-qa/mobile-390x844-sample-result.png"
+    ]
+  }
+}
