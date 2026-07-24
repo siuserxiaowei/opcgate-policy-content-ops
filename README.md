@@ -35,6 +35,14 @@ python3 tests/ui_qa.py
 
 该脚本覆盖 1440×1000 桌面与 390×844 手机视口、输入模式切换、样例/手动分析、核验未完成时禁止复制/完成后放行、草稿修改后重新上锁、隐藏状态、横向溢出以及浏览器控制台错误。
 
+从已部署版本生成与投稿文案对应的 6 张演示图：
+
+```bash
+npm run capture:submission
+```
+
+最终发布文案、官方要求映射、配图顺序和 CLI 权益状态见 [`SUBMISSION_DRAFT.md`](SUBMISSION_DRAFT.md)。
+
 演示闭环：
 
 ```text

@@ -7,6 +7,7 @@
   "scripts": {
     "demo": "node scripts/demo.mjs",
     "test": "node --test tests/*.test.mjs",
+    "capture:submission": "python3 scripts/capture_submission.py",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },
