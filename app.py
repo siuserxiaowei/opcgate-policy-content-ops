@@ -475,7 +475,7 @@ def build_demo():
         raise RuntimeError("请先安装 requirements.txt 中的 Gradio") from error
 
     today = date.today().isoformat()
-    with gr.Blocks(title=PRODUCT_NAME, theme=gr.themes.Soft(primary_hue="blue", secondary_hue="teal"), css=CSS) as demo:
+    with gr.Blocks(title=PRODUCT_NAME) as demo:
         gr.HTML("""
         <section class="hero">
           <span class="pill">AI + 运营 · 可解释政策内容工作台</span>
@@ -544,4 +544,7 @@ def build_demo():
 
 
 if __name__ == "__main__":
-    build_demo().launch()
+    build_demo().launch(
+        theme=gr.themes.Soft(primary_hue="blue", secondary_hue="teal"),
+        css=CSS,
+    )
