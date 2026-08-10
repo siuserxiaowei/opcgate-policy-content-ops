@@ -18,8 +18,8 @@
 - 数据快照：2026-05-22
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
-- 新版部署源码对应 GitHub commit：待本次推送后填写
-- ModelScope 新版上传提交：待本次推送后填写
+- 新版部署源码对应 GitHub commit：`39432f0`
+- ModelScope 新版上传提交：`app.py` 与 `README.md` 两条在线提交；README 最新提交 `8cda79bd`，部署状态待验收
 - 可见性：公开体验
 - 首次成功验收：2026-08-10 16:56 CST
 
