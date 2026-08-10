@@ -12,13 +12,13 @@
 ## 本届比赛版本
 
 - 产品：OPC Gate 政策内容运营助手
-- SDK：Gradio 4.44.1
+- SDK：Gradio 6.17.3
 - 入口：`app.py`
 - 数据：125 条政策、42 个城市 / 适用范围、128 个载体样本
 - 数据快照：2026-05-22
-- ModelScope 创空间：`[待创建]`
-- GitHub 仓库：`[待创建]`
-- 最终 commit：`[待提交后填写]`
+- ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
+- GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
+- 最终 commit：`[首次部署提交后填写]`
 
 ## 自动化验证
 

@@ -4,10 +4,10 @@ emoji: 🔎
 colorFrom: blue
 colorTo: teal
 sdk: gradio
-sdk_version: 4.44.1
+sdk_version: 6.17.3
 app_file: app.py
 pinned: false
-license: mit
+license: apache-2.0
 ---
 
 # OPC Gate 政策内容运营助手
@@ -46,7 +46,7 @@ license: mit
 创空间配置：
 
 - SDK：Gradio
-- SDK 版本：4.44.1
+- SDK 版本：6.17.3
 - 启动文件：`app.py`
 - 资源：免费 CPU 即可运行
 - 发布形式：比赛期间建议“仅公开体验”
@@ -104,4 +104,4 @@ HONEST_DISCLOSURE.md   # 既有基础与本届新增的诚实披露
 - 当前没有真实用户规模、传播量、转化率或商业收入数据，不作此类宣称。
 - 模型输出可能出错；确定性扫描只检查结构、边界和高风险措辞，不等于事实核验。
 
-代码使用 MIT License。政策原文和第三方数据不随代码许可证重新授权。
+代码使用 Apache License 2.0。政策原文和第三方数据不随代码许可证重新授权。
