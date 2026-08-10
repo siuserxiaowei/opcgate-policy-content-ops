@@ -18,14 +18,24 @@
 - 数据快照：2026-05-22
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
-- 最终 commit：`[首次部署提交后填写]`
+- 当前 GitHub commit：`92958bfd3db400d2f2fa3efac47aacb17c657af5`
 
 ## 自动化验证
 
-- Python 比赛版测试：9/9 通过；
+- Python 比赛版测试：11/11 通过；
 - 既有 JavaScript 回归测试：15/15 通过；
-- Gradio 本地 UI：`[待验收]`；
+- Gradio 本地 UI：已在 Gradio 6.17.3、桌面端和 390×844 手机视口验收；
 - ModelScope 正式环境：`[待验收]`。
+
+## 本地 Gradio 截图证据
+
+- 桌面端：`submission/screenshots/local-gradio-desktop.png`
+  - 像素：1265 × 2225
+  - SHA-256：`875b1ab2cc81ff3107c6e97071a381120a7bd7d579fbc941ac50332c2f5637fd`
+- 手机端：`submission/screenshots/local-gradio-mobile.png`
+  - 像素：375 × 3445
+  - SHA-256：`221a70e680f7cd494b515371912734afc6da440f83fe3152083e7acd74a899ab`
+- 手机端结构检查：页面 `scrollWidth=375`，390 px 视口无页面级横向溢出；宽政策表在组件内部滚动。
 
 ## 部署完成后必须补充
 
