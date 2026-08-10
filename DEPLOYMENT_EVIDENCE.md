@@ -19,9 +19,12 @@
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
 - 新版部署源码对应 GitHub commit：`39432f0`
-- ModelScope 新版上传提交：`app.py` 与 `README.md` 两条在线提交；README 最新提交 `8cda79bd`，部署状态待验收
+- ModelScope 新版上传提交：`app.py` 与 `README.md` 两条在线提交；README 最新提交 `8cda79bd`
+- 部署状态：运行中
+- 展示名称：OPC Gate 空间匹配与申请助手
+- 公开简介：根据城市、行业、项目阶段和服务需求，推荐适合的 OPC 空间，解释匹配依据，并帮助比较和准备申请。
 - 可见性：公开体验
-- 首次成功验收：2026-08-10 16:56 CST
+- 新版正式环境成功验收：2026-08-10 CST
 
 ## 自动化验证
 
@@ -30,7 +33,8 @@
 - 既有 JavaScript 回归测试：15/15 通过；
 - Gradio 本地 UI：已在 Gradio 6.17.3、桌面端和 390×844 手机视口验收；
 - 本地新版：已跑通广州 AI 默认案例、空间匹配护照和申请入口边界；390×844 视口无横向溢出。
-- ModelScope 正式环境：当前仍是旧版，待推送后重新验收新版搜索、比较和申请清单。
+- ModelScope 正式环境：已验收新版广州 AI 默认搜索，返回 6 个同城候选，琶洲模方 SOPC 加速器排名第一；琶洲与鱼珠两项横向比较、申请清单均正常；南沙国际 OPC 生态社区展示经核验的公开入口 `https://scjgj.gz.gov.cn/ywt/`。
+- ModelScope 手机视口：公开应用地址在 390×844 视口下 `innerWidth=390`、`clientWidth=375`、`scrollWidth=375`，无页面级横向溢出。
 
 ## 本地 Gradio 截图证据
 
@@ -54,12 +58,23 @@
   - SHA-256：`221a70e680f7cd494b515371912734afc6da440f83fe3152083e7acd74a899ab`
 - 手机端结构检查：页面 `scrollWidth=375`，390 px 视口无页面级横向溢出；宽政策表在组件内部滚动。
 
-## ModelScope 正式环境截图证据（旧版，待新版替换）
+## ModelScope 正式环境截图证据
+
+新版空间匹配与申请工作台：
+
+- 桌面端完整搜索、推荐护照、两项比较与申请清单：`submission/screenshots/modelscope-gradio-desktop-new.jpg`
+  - 像素：1425 × 4212
+  - SHA-256：`5aa660571b40fc95dd00be6eafa6e9dcce26c8ce1967f33706788943c2ed40fe`
+- 手机端公开应用首屏与输入工作台：`submission/screenshots/modelscope-gradio-mobile-new.jpg`
+  - 像素：375 × 2782
+  - SHA-256：`c684b4b7a0f03c96fb95e63c05e9a58081266dd61cf2560b598fb47826f86321`
+  - 390×844 视口下 `scrollWidth=375`，无页面级横向溢出。
+
+以下为旧版政策内容工作流历史证据，不再代表当前提交方向：
 
 - 桌面端完整运行结果：`submission/screenshots/modelscope-desktop.jpg`
   - 像素：2033 × 2225
   - SHA-256：`fff99c82700b347c2d5868976639b33dce0717e3c762dd0158244cce6bde3fb5`
-- 正式环境手机截图：尚未保存；移动结构目前由同一 Gradio 6.17.3 构建的本地 390×844 验收覆盖，不将其冒充云端手机截图。
 
 ## 仍待补充
 
