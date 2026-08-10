@@ -1,10 +1,11 @@
 # Attribution
 
-本项目是 OPC Gate 的独立衍生实现，复用的是“来源优先、线索与事实分离、人工复核门禁”的产品方法，不复制原站页面代码或全部数据集。
+本项目是 OPC Gate 的独立衍生实现，完整保留既有 VibeSocial 原型 Git 历史。
 
-- 原项目：https://github.com/siuserxiaowei/opc-policy
-- 原数据快照：`data/policies.json`，2026-05-22
-- 原数据 SHA-256：`698ef05ec4e6343f529215da01a3add0924939e21e4d3a0576d9b8959dc567f3`
-- 本仓仅摘录 2 条政策的名称、概括、关键词、更新时间和公开原文 URL，并增加 1 条明确标注的内部方法样例。
+- OPC Gate：https://github.com/siuserxiaowei/opc-policy
+- 活动期原型：https://github.com/siuserxiaowei/opc-vibesocial-trust-agent
+- OPC Gate 数据快照：2026-05-22
 
-政策文本与政府页面的权利归原发布机构所有，MIT 许可证仅适用于本仓库原创代码与文档，不替第三方数据授予权利。
+本届版本复用 OPC Gate 的公开政策、城市和载体数据，以及“来源优先、线索与资格分离、人工复核门禁”的领域方法；新增内容见 `HONEST_DISCLOSURE.md`。
+
+政策原文与政府页面的权利归原发布机构所有。MIT 许可证只适用于本仓库原创代码和文档，不替第三方材料授予权利。

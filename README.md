@@ -1,85 +1,107 @@
-# OPC 热点可信解读助手
+---
+title: OPC Gate 政策内容运营助手
+emoji: 🔎
+colorFrom: blue
+colorTo: teal
+sdk: gradio
+sdk_version: 4.44.1
+app_file: app.py
+pinned: false
+license: mit
+---
 
-> VibeSocial Evidence Desk · `#微博VibeLab#` `#VibeSocial#`
+# OPC Gate 政策内容运营助手
 
-一个可在线体验、也可零依赖本地运行的可信社交内容原型：把**明确标注为非实时的微博热点样例，或用户手动粘贴的公开文本**，转成关键词与主题、可追溯的政策线索关联、来源/时效/发布风险评分、微博草稿和人工核验清单。
+> AI + 运营：把公开话题转成有来源、有边界、发布前可核验的政策内容。
 
-- 在线体验：https://opc-vibesocial-trust-agent.siuserxy.workers.dev
-- 公开源码：https://github.com/siuserxiaowei/opc-vibesocial-trust-agent
+面向园区、创业服务机构、政策研究与新媒体运营人员。用户输入一段公开内容或自拟选题摘要，系统会完成：
 
-它不接入微博 API，不抓取热搜、评论或用户数据，也不会自动发布。用户提供的链接只记录为待核验来源，系统不会自动读取。政策关联分是内容研究线索，不是资格认定、获批概率或政府评分。
+1. 提取话题关键词和运营意图；
+2. 在 OPC Gate 的 125 条政策、42 个城市 / 适用范围和 128 个社区 / 载体样本中寻找相关证据；
+3. 输出带来源、数据日期、匹配理由和适用边界的政策线索；
+4. 生成“事实 / 推断 / 待核验”三层草稿；
+5. 可选调用 ModelScope API-Inference，在证据范围内改写；
+6. 对模型结果再次做确定性风险扫描；
+7. 要求运营人员完成人工核验后手动发布。
 
-在线版采用分层工作流：确定性引擎先整理最小证据上下文、时效与风险；Cloudflare Workers AI 根据提示词和该上下文改写草稿。模型输出仍可能添加或遗漏信息，因此服务端会再做确定性边界扫描；未通过或模型失败时，自动降级到本地确定性模板。该扫描不是事实核验，也不是事实白名单。
+本工具不抓取账号、私信、Cookie 或未授权个人信息，不自动发布，不把相关性排序描述成申报资格、获批概率或政府推荐。
 
-## 运行
+## 活动期间首次发布与复用披露
 
-需要 Node.js 20+，核心逻辑无需安装第三方依赖：
+这是 `opc-vibesocial-trust-agent` 在 **2026-07-23** 首次形成、并于 **2026-07-24** 公开发布的原创衍生能力的本届比赛版；时间位于大赛 2026-07-15 至 2026-08-10 的活动周期内。
+
+它复用了既有 OPC Gate 的公开政策数据和领域方法，没有把赛前存在的整个 OPC Gate 伪装成新项目。本次比赛版新增：
+
+- ModelScope 创空间 Gradio 入口；
+- ModelScope API-Inference 可选改写与无 Token 降级；
+- 园区 / 创业服务机构的政策内容运营工作流；
+- 事实、推断、待核验三层草稿；
+- AI 输出后的确定性风险扫描；
+- 赛事专用演示、测试和提交材料。
+
+详细边界见 [HONEST_DISCLOSURE.md](HONEST_DISCLOSURE.md)，来源与许可见 [ATTRIBUTION.md](ATTRIBUTION.md) 和 [DATA_LICENSE.md](DATA_LICENSE.md)。
+
+## ModelScope 部署
+
+创空间配置：
+
+- SDK：Gradio
+- SDK 版本：4.44.1
+- 启动文件：`app.py`
+- 资源：免费 CPU 即可运行
+- 发布形式：比赛期间建议“仅公开体验”
+
+规则分析无需任何密钥。需要模型改写时，在创空间环境变量中配置：
+
+```text
+MODELSCOPE_ACCESS_TOKEN=<ModelScope Access Token>
+MODELSCOPE_MODEL_ID=Qwen/Qwen3.5-35B-A3B
+```
+
+模型 ID 会随平台支持列表变化；以模型页面实时给出的 API-Inference 示例为准。Token 不得提交到 Git。
+
+本地运行：
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+## 验证
+
+核心 Python 测试：
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+既有 VibeSocial 衍生原型的 JavaScript 回归测试仍保留：
 
 ```bash
 npm test
-npm run demo
 ```
 
-本地网页与部署：
+测试覆盖数据口径、政策匹配、来源保留、危险 URL、AI 无 Token 降级、资格 / 保证 / 金额风险拦截、发布门禁和 API 输入边界。
 
-```bash
-npx wrangler dev
-npx wrangler deploy
-```
-
-可选 UI 验收（需先安装 Python Playwright 1.58+ 与 Chromium，并在 `127.0.0.1:8787` 启动 `wrangler dev`）：
-
-```bash
-python3 tests/ui_qa.py
-```
-
-该脚本覆盖 1440×1000 桌面与 390×844 手机视口、输入模式切换、样例/手动分析、核验未完成时禁止复制/完成后放行、草稿修改后重新上锁、隐藏状态、横向溢出以及浏览器控制台错误。
-
-从稳定线上域名生成与投稿文案对应的 6 张演示图：
-
-```bash
-npm run capture:submission
-```
-
-最终发布文案、官方要求映射、配图顺序和 CLI 权益状态见 [`SUBMISSION_DRAFT.md`](SUBMISSION_DRAFT.md)；部署与截图能证明什么、不能证明什么见 [`DEPLOYMENT_EVIDENCE.md`](DEPLOYMENT_EVIDENCE.md)。
-
-演示闭环：
+## 项目结构
 
 ```text
-离线话题样例 / 用户手动输入的公开文本
-  → 关键词/主题抽取
-  → 脱敏政策记录关联
-  → 来源可信度 + 时效性 + 发布风险
-  → 微博草稿
-  → 必须人工完成的核验清单
+app.py                 # ModelScope / Gradio 应用、规则分析与 API-Inference 适配
+data/opcgate-*.json    # OPC Gate 完整公开数据快照
+data/policies.json     # 既有 JS 原型的最小回归测试夹具
+tests/                 # Python 与既有 JavaScript 回归测试
+submission/            # 报名、作品、研习社、社媒心得、演示与检查清单
+HONEST_DISCLOSURE.md   # 既有基础与本届新增的诚实披露
 ```
-
-核心实现位于 `src/core.js`：
-
-- `extractKeywords()`：结合正文词频和显式标签，确定性抽取关键词；
-- `inferThemes()`：映射 AI Agent、创业、政策、Vibe Coding、社交内容主题；
-- `linkPolicies()`：显示匹配词、来源类型、快照日期和各项子分；
-- `assessPublicationRisk()`：识别保证获批、资格、官方背书、金额、紧迫性等高风险措辞；
-- `scanAIDraft()`：确定性检查必需披露、赛事标签、高风险措辞和上下文外数字；不等同事实核验；
-- `generateWeiboDraft()`：生成带“非实时样例”与人工核验提示的草稿；
-- `buildVerificationChecklist()`：要求回到原始来源、检查隐私、核对政策并最终人工发布；
-- `worker.js`：输入约束、Cloudflare Workers AI 提示词约束改写、输出边界扫描、失败降级和静态资源服务；
-- `public/`：响应式“可信热点编辑台”，支持样例/手动输入、证据卡片、草稿编辑与强制复制门禁。
-
-## 数据边界
-
-- `data/sample-topics.json` 是人工编写的离线演示内容，不是实时微博数据。
-- `data/policies.json` 只保存少量公开入口与脱敏说明；具体政策必须重新打开官方页面核验。
-- 不存储 Cookie、Token、私信、评论、账号画像或未经授权的个人信息。
-- 草稿必须完成页面列出的全部核验项后才能通过按钮或编辑框复制；草稿再次编辑会清空勾选并重新锁定。该前端门禁用于正常界面流程，不是防止开发者工具绕过的安全边界。程序没有微博登录、投稿或消息发送能力。
-- 本项目代码没有数据库写入、日志持久化或训练管线；应用逻辑只在单次请求期间处理用户输入。勾选 AI 改写时，输入与最小证据上下文会发送给 Cloudflare Workers AI，第三方如何处理数据受其当时有效的服务条款与隐私政策约束，本仓库不能承诺“不用于训练”。
 
 ## 已知限制
 
-- 关键词抽取和评分是可解释的启发式规则，不是训练模型或平台热度算法。
-- 政府门户入口不等于一个正在申报的具体项目。
-- 当前样例没有真实用户、传播量、转化率、获奖或政策获批数据。
-- 外部网站的可用性与内容可能变化，发布当天必须重新核验。
-- 公网体验版不提供账号系统或微博数据接入；生产化前仍需在 Cloudflare 侧配置速率限制、配额监控与滥用告警。
+- 当前输入来自用户手动粘贴或明确标注的演示场景，不冒充实时平台数据。
+- 相关性算法是可解释启发式规则，不是政府审批模型。
+- 数据快照日期为 2026-05-22；发布内容前必须回到最新官方原文核验。
+- 当前没有真实用户规模、传播量、转化率或商业收入数据，不作此类宣称。
+- 模型输出可能出错；确定性扫描只检查结构、边界和高风险措辞，不等于事实核验。
 
-既有 OPC Gate 与本衍生原型的复用边界见 [HONEST_DISCLOSURE.md](HONEST_DISCLOSURE.md)，数据权利边界见 [DATA_LICENSE.md](DATA_LICENSE.md) 和 [ATTRIBUTION.md](ATTRIBUTION.md)。
+代码使用 MIT License。政策原文和第三方数据不随代码许可证重新授权。

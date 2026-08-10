@@ -1,0 +1,2577 @@
+{
+  "version": "1.6.0",
+  "updated_at": "2026-05-22",
+  "total": 128,
+  "communities": [
+    {
+      "id": "comm-001",
+      "name": "OPC创新工坊",
+      "city": "广州",
+      "province": "广东",
+      "district": "天河",
+      "address": "天河区珠江新城华利路61号五楼509室",
+      "operator": "",
+      "track": "",
+      "features": [
+        "免费Token",
+        "AI框架",
+        "一对一指导"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "guangzhou-city-004"
+      ]
+    },
+    {
+      "id": "comm-002",
+      "name": "琶洲元创OPC社区",
+      "city": "广州",
+      "province": "广东",
+      "district": "海珠",
+      "address": "琶洲",
+      "operator": "中科科创联合基金",
+      "track": "",
+      "features": [
+        "首期1000万基金",
+        "投孵联动",
+        "硬科技OPC",
+        "八大闭环服务"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "guangzhou-haizhu-001"
+      ]
+    },
+    {
+      "id": "comm-003",
+      "name": "TIT创意园OPC社区",
+      "city": "广州",
+      "province": "广东",
+      "district": "海珠",
+      "address": "海珠区TIT创意园",
+      "operator": "TIT创意园",
+      "track": "",
+      "features": [
+        "微信生态对接",
+        "服装设计类OPC"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "guangzhou-haizhu-001"
+      ]
+    },
+    {
+      "id": "comm-004",
+      "name": "琶洲模方 SOPC加速器",
+      "city": "广州",
+      "province": "广东",
+      "district": "海珠",
+      "address": "海珠区琶洲试验区",
+      "operator": "清华大学AIR指导",
+      "track": "AI / 大模型",
+      "features": [
+        "粤港澳大湾区首个大模型孵化空间",
+        "已孵化45家AI企业 累计融资10.88亿",
+        "智能体专区最高12个月工位全免",
+        "算力补贴50% 最高20万/年",
+        "数据补贴30% 最高10万/年",
+        "入驻路径: 琶洲算法大赛 或 BP评审"
+      ],
+      "source": "https://www.haizhu.gov.cn/hdjlpt/yjzj/answer/49445",
+      "verified": true,
+      "policy_ids": [
+        "guangzhou-haizhu-002"
+      ]
+    },
+    {
+      "id": "comm-005",
+      "name": "琶洲元创·OPC社区（首批子社区）",
+      "city": "广州",
+      "province": "广东",
+      "district": "海珠",
+      "address": "海珠区琶洲",
+      "operator": "中科科创联合基金",
+      "track": "硬科技",
+      "features": [
+        "首批投入1000万元",
+        "已入驻3家OPC企业",
+        "与comm-002为姊妹子社区，运营同源"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "guangzhou-haizhu-002"
+      ]
+    },
+    {
+      "id": "comm-006",
+      "name": "鱼珠·元启 OPC生态社区",
+      "city": "广州",
+      "province": "广东",
+      "district": "黄埔",
+      "address": "黄埔区海丝城鱼珠片区",
+      "operator": "广东鼎泰控股 × 鱼珠运营中心（科学城数科集团）",
+      "track": "综合OPC / 游戏产业创作",
+      "features": [
+        "广州开发区首个OPC生态社区（2026-03-20签约）",
+        "最长3年免租，后2年减半",
+        "接入\"黄埔一号\"12000P+智算集群",
+        "园区TOKEN 8条：入驻3个月免费Token / 注册后1年Token",
+        "通用大模型算力30%补贴最高300万"
+      ],
+      "source": "https://m.jiemian.com/article/14156017.html",
+      "verified": true,
+      "policy_ids": [
+        "guangzhou-huangpu-001"
+      ]
+    },
+    {
+      "id": "comm-007",
+      "name": "南沙国际OPC生态社区",
+      "city": "广州",
+      "province": "广东",
+      "district": "南沙",
+      "address": "南沙街道湾区数创中心（专窗：凤凰大道1号）",
+      "operator": "南沙科金控股集团 / 南沙区政务服务中心",
+      "track": "跨境AI / 数字游民 / 数字文创",
+      "features": [
+        "0.5天办照 · 当日受理/核准/发照",
+        "开业礼包：执照+5枚免费印章+发票+税务Ukey",
+        "免费办公 + 万兆网宽带 + \"拎包开干\"",
+        "线上入口：https://scjgj.gz.gov.cn/ywt/"
+      ],
+      "source": "http://www.gzns.gov.cn/zwgk/rdzt/OPC/OPCYLS/content/post_10745016.html",
+      "verified": true,
+      "policy_ids": [
+        "guangzhou-nansha-001"
+      ]
+    },
+    {
+      "id": "comm-008",
+      "name": "万博CBD OPC空间",
+      "city": "广州",
+      "province": "广东",
+      "district": "番禺",
+      "address": "番禺区万博商务区 + 广州大学城",
+      "operator": "番禺区 / 区属国有物业",
+      "track": "智能制造 / 智慧政务 / 智慧园区 / 智慧医疗",
+      "features": [
+        "1300+工位 · 650+人才公寓",
+        "首年免租 后2年减半（区属国有物业）",
+        "中信银行OPC专项信贷",
+        "博士人才落户补贴最高10万"
+      ],
+      "source": "https://www.panyu.gov.cn/gzpykgsx/gkmlpt/content/10/10735/post_10735201.html",
+      "verified": true,
+      "policy_ids": [
+        "guangzhou-panyu-001"
+      ]
+    },
+    {
+      "id": "comm-009",
+      "name": "模力营",
+      "city": "深圳",
+      "province": "广东",
+      "district": "南山",
+      "address": "南山区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "大湾区最大AI孵化器",
+        "10万㎡",
+        "近200家企业",
+        "六个券"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shenzhen-nanshan-001"
+      ]
+    },
+    {
+      "id": "comm-010",
+      "name": "华强北OPC孵化基地(12个)",
+      "city": "深圳",
+      "province": "广东",
+      "district": "福田",
+      "address": "福田区华强北",
+      "operator": "",
+      "track": "",
+      "features": [
+        "赛格众创",
+        "智方舟",
+        "月租千元",
+        "15天免费住宿"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shenzhen-futian-001"
+      ]
+    },
+    {
+      "id": "comm-011",
+      "name": "π创空间",
+      "city": "深圳",
+      "province": "广东",
+      "district": "罗湖",
+      "address": "罗湖区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shenzhen-luohu-001"
+      ]
+    },
+    {
+      "id": "comm-012",
+      "name": "璞跃创新中心",
+      "city": "深圳",
+      "province": "广东",
+      "district": "罗湖",
+      "address": "罗湖区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shenzhen-luohu-001"
+      ]
+    },
+    {
+      "id": "comm-013",
+      "name": "亦庄模数OPC社区",
+      "city": "北京",
+      "province": "北京",
+      "district": "经开区",
+      "address": "北京经开区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "首期3000㎡",
+        "种子算力包",
+        "数据券",
+        "目标培育1万名AI开发者、孵化200家OPC企业"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "beijing-yizhuang-001"
+      ]
+    },
+    {
+      "id": "comm-014",
+      "name": "中关村AI北纬社区",
+      "city": "北京",
+      "province": "北京",
+      "district": "海淀",
+      "address": "海淀区上地街道",
+      "operator": "",
+      "track": "",
+      "features": [
+        "6000㎡",
+        "免费注册",
+        "免费办公",
+        "弹性算力",
+        "Agent超市",
+        "定制培训"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "beijing-haidian-001"
+      ]
+    },
+    {
+      "id": "comm-015",
+      "name": "OPC网络视听创业社区",
+      "city": "北京",
+      "province": "北京",
+      "district": "通州",
+      "address": "通州运河商务区紫光VID产业园",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "beijing-tongzhou-001"
+      ]
+    },
+    {
+      "id": "comm-016",
+      "name": "AI+漫剧OPC孵化基地",
+      "city": "北京",
+      "province": "北京",
+      "district": "通州",
+      "address": "宋庄",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "beijing-tongzhou-001"
+      ]
+    },
+    {
+      "id": "comm-017",
+      "name": "北杨人工智能创新小镇",
+      "city": "上海",
+      "province": "上海",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "首年工位全免",
+        "算力/模型/语料券"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shanghai-city-001"
+      ]
+    },
+    {
+      "id": "comm-018",
+      "name": "视听静界OPC社区",
+      "city": "上海",
+      "province": "上海",
+      "district": "静安",
+      "address": "静安区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "视听方向",
+        "专属工位",
+        "四券合一"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shanghai-jingan-001"
+      ]
+    },
+    {
+      "id": "comm-019",
+      "name": "鸿鹄汇",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "上城",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "国内首个OPC加速社区",
+        "5万美元无条件创业资金"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "hangzhou-shangcheng-001"
+      ]
+    },
+    {
+      "id": "comm-020",
+      "name": "未来数智港(中国数谷)",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "上城",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "面向大众创业者",
+        "1600+入孵申请"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "hangzhou-shangcheng-001"
+      ]
+    },
+    {
+      "id": "comm-021",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区武汉站",
+      "city": "武汉",
+      "province": "湖北",
+      "district": "武昌",
+      "address": "武汉市武昌区徐东大街66号阿里中心·武汉T2办公楼7楼",
+      "operator": "阿里巴巴创业社区 / 武昌区相关生态",
+      "track": "OPC社区 / 算力补贴 / 资源对接",
+      "features": [
+        "4000㎡",
+        "400工位",
+        "已运营",
+        "武汉首个OPC社区",
+        "工位补贴最长不超过三年",
+        "阿里云及武昌区智算中心优惠与免费资源",
+        "政策申报、财税代办、投融资、创业辅导和法律服务",
+        "明星企业优先推荐人才计划、投资对接和品牌宣传"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "policy_ids": [
+        "wuhan-city-001",
+        "aliyun-opc-space-001"
+      ],
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "updated_at": "2026-05-22"
+    },
+    {
+      "id": "comm-022",
+      "name": "洪山区OPC社区",
+      "city": "武汉",
+      "province": "湖北",
+      "district": "",
+      "address": "洪山区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "1.5万㎡",
+        "1000+工位"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "wuhan-city-001"
+      ]
+    },
+    {
+      "id": "comm-023",
+      "name": "东湖高新OPC集聚区",
+      "city": "武汉",
+      "province": "湖北",
+      "district": "",
+      "address": "光谷",
+      "operator": "",
+      "track": "",
+      "features": [
+        "建设中"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "wuhan-city-001"
+      ]
+    },
+    {
+      "id": "comm-024",
+      "name": "光谷首批8家OPC生态社区",
+      "city": "武汉",
+      "province": "湖北",
+      "district": "",
+      "address": "东湖高新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "2026-03-31集中揭牌",
+        "最高奖励500万",
+        "开源聚变AI研究院"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "wuhan-city-001"
+      ]
+    },
+    {
+      "id": "comm-025",
+      "name": "星元云智OPC Hub",
+      "city": "成都",
+      "province": "四川",
+      "district": "成华区",
+      "address": "成华区东广人工智能谷",
+      "operator": "成华区政府",
+      "track": "",
+      "features": [
+        "西部首个智算底座AI实验室",
+        "AI+机器人",
+        "边缘算力"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chengdu-chenghua-001"
+      ]
+    },
+    {
+      "id": "comm-026",
+      "name": "紫金星辰OPC社区",
+      "city": "南京",
+      "province": "江苏",
+      "district": "",
+      "address": "江宁区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "3年免费工位",
+        "1000万人才专项"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "nanjing-city-001"
+      ]
+    },
+    {
+      "id": "comm-027",
+      "name": "AI模立方",
+      "city": "合肥",
+      "province": "安徽",
+      "district": "高新",
+      "address": "合肥高新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "2000㎡",
+        "科大讯飞生态",
+        "中国声谷",
+        "算力/语料/模型券"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "hefei-city-001"
+      ]
+    },
+    {
+      "id": "comm-028",
+      "name": "马栏山OPC创意社区",
+      "city": "长沙",
+      "province": "湖南",
+      "district": "",
+      "address": "马栏山视频文创产业园",
+      "operator": "",
+      "track": "",
+      "features": [
+        "6000㎡",
+        "1000PFlops算力"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "changsha-city-001"
+      ]
+    },
+    {
+      "id": "comm-029",
+      "name": "望城大泽河OPC创业中心",
+      "city": "长沙",
+      "province": "湖南",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "湖南首个OPC中心"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "changsha-city-001"
+      ]
+    },
+    {
+      "id": "comm-030",
+      "name": "海王星数字文创园OPC社区",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "",
+      "address": "两江新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "首期3000㎡",
+        "拎包入驻",
+        "免费工商财税法律1年",
+        "低息贷款",
+        "算力券/模型券"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chongqing-city-001"
+      ]
+    },
+    {
+      "id": "comm-031",
+      "name": "仙桃数据谷OPC社区",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "",
+      "address": "两江新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "2个社区",
+        "30+家入驻",
+        "1万㎡"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chongqing-city-001"
+      ]
+    },
+    {
+      "id": "comm-032",
+      "name": "上清寺AI+OPC示范社区",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "",
+      "address": "渝中区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "已投用"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chongqing-city-001"
+      ]
+    },
+    {
+      "id": "comm-033",
+      "name": "罗布乐思创新中心",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "",
+      "address": "南岸区重庆软件产业园",
+      "operator": "",
+      "track": "",
+      "features": [
+        "向OPC开放"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chongqing-city-001"
+      ]
+    },
+    {
+      "id": "comm-034",
+      "name": "独墅湖青创港OPC青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州工业园区独墅湖",
+      "operator": "",
+      "track": "",
+      "features": [
+        "三年免租",
+        "人才公寓低价租",
+        "共享算力",
+        "拎包入驻",
+        "慧湖小领军政策2年跟踪服务"
+      ],
+      "source": "https://www.sipac.gov.cn/szgyyq/mtjj/202604/95511453cc5e4173ba78ee0c3e79b0d3.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-sipd-001"
+      ]
+    },
+    {
+      "id": "comm-035",
+      "name": "模术空间OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州工业园区金鸡湖大道88号人工智能产业园",
+      "operator": "苏州国际科技园 SISPARK",
+      "track": "大模型生态 / AI+制造",
+      "features": [
+        "全省首个大模型生态社区",
+        "24000P智算算力即开即用",
+        "六位一体全生命周期服务"
+      ],
+      "source": "https://www.sipac.gov.cn/szgyyq/mtjj/202604/95511453cc5e4173ba78ee0c3e79b0d3.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-sipd-001"
+      ]
+    },
+    {
+      "id": "comm-036",
+      "name": "中科创谷OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州工业园区",
+      "operator": "",
+      "track": "人工智能 / 生物医药 / 智能新材料",
+      "features": [
+        "数字孪生+算力赋能模式",
+        "综合类标杆社区"
+      ],
+      "source": "https://www.sipac.gov.cn/szgyyq/mtjj/202604/95511453cc5e4173ba78ee0c3e79b0d3.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-sipd-001"
+      ]
+    },
+    {
+      "id": "comm-037",
+      "name": "南湖梦AI OPC求解社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州国际科技园 SISPARK",
+      "operator": "苏州南湖梦科技集团股份有限公司",
+      "track": "AI大模型 / 智能体",
+      "features": [
+        "联动百度飞桨人工智能产业赋能中心",
+        "文心大模型数据生态中心联合运营",
+        "全栈技术赋能"
+      ],
+      "source": "https://www.sipac.gov.cn/szgyyq/mtjj/202601/dbc23caa9d1d45f28ef9de6ccaf0409f.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-sipd-001"
+      ]
+    },
+    {
+      "id": "comm-038",
+      "name": "河海大学苏州未来水谷OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州工业园区",
+      "operator": "河海大学苏州高等研究院",
+      "track": "产学研转化",
+      "features": [],
+      "source": "https://www.zgjssw.gov.cn/yaowen/202604/t20260412_8567875.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-sipd-001"
+      ]
+    },
+    {
+      "id": "comm-039",
+      "name": "青禾创客OPC创业社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "吴江",
+      "address": "吴江区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "3年免租",
+        "零租工位",
+        "一个工位一人公司一小时开业"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-wujiang-001"
+      ]
+    },
+    {
+      "id": "comm-040",
+      "name": "淀山湖AI OPC社区（魔滴空间）",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "昆山",
+      "address": "昆山淀山湖",
+      "operator": "",
+      "track": "",
+      "features": [
+        "OPC创业首选地",
+        "一站式办理"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-kunshan-001"
+      ]
+    },
+    {
+      "id": "comm-041",
+      "name": "中新昆承OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "昆山",
+      "address": "昆山",
+      "operator": "",
+      "track": "",
+      "features": [
+        "案例：鲸愈沪宁智能科技入驻"
+      ],
+      "source": "https://www.yangtse.com/news/jiangsu/suzhou/202604/t20260411_341127.html",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-kunshan-001"
+      ]
+    },
+    {
+      "id": "comm-042",
+      "name": "东渡人才港",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "张家港",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-043",
+      "name": "常春藤人才港(AIGC)OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "常熟",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-044",
+      "name": "淀山湖AI OPC社区(魔滴空间)",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "昆山",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-045",
+      "name": "智汇谷科技创新园",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "太仓",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-046",
+      "name": "青禾创客OPC创业社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "吴江",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-047",
+      "name": "太湖科创中心OPC青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "吴中",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-048",
+      "name": "大数据开发者创新中心OPC生态基地",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "相城",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-049",
+      "name": "校园里青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "姑苏",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-050",
+      "name": "中国移动云数和创AI Agent OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "高新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "3000㎡",
+        "免费工位",
+        "算力1.5折"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-051",
+      "name": "独墅湖青创港OPC青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "",
+      "address": "工业园区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "三年免租",
+        "人才公寓",
+        "共享算力"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-communities-001"
+      ]
+    },
+    {
+      "id": "comm-052",
+      "name": "苏州创业园OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "高新区",
+      "address": "苏州高新区",
+      "operator": "苏州高新技术创业服务中心",
+      "track": "全市首批专业化OPC社区",
+      "features": [
+        "1+6+X全域生态体系",
+        "算力支撑",
+        "场景对接",
+        "产学研合作"
+      ],
+      "source": "https://www.yangtse.com/news/jiangsu/suzhou/202604/t20260411_341127.html",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-gaoxin-001"
+      ]
+    },
+    {
+      "id": "comm-053",
+      "name": "太湖科创中心OPC青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "吴中",
+      "address": "吴中区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-wuzhong-001"
+      ]
+    },
+    {
+      "id": "comm-054",
+      "name": "大数据开发者创新中心OPC生态基地",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "相城",
+      "address": "相城区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-xiangcheng-001"
+      ]
+    },
+    {
+      "id": "comm-055",
+      "name": "高铁新城环秀湖人工智能OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "相城",
+      "address": "相城区苏州高铁新城环秀湖",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "https://www.zgjssw.gov.cn/yaowen/202604/t20260412_8567875.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-xiangcheng-001"
+      ]
+    },
+    {
+      "id": "comm-056",
+      "name": "校园里青年社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "姑苏",
+      "address": "姑苏区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suzhou-gusu-001"
+      ]
+    },
+    {
+      "id": "comm-057",
+      "name": "平江新城OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "姑苏",
+      "address": "姑苏区平江新城",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "https://news.2500sz.com/doc/2026/04/11/1205116.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-gusu-001"
+      ]
+    },
+    {
+      "id": "comm-058",
+      "name": "城市智谷OPC社区",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "姑苏",
+      "address": "姑苏区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "https://www.zgjssw.gov.cn/yaowen/202604/t20260412_8567875.shtml",
+      "verified": true,
+      "policy_ids": [
+        "suzhou-gusu-001"
+      ]
+    },
+    {
+      "id": "comm-059",
+      "name": "济南数智OPC社区(12节点)",
+      "city": "济南",
+      "province": "山东",
+      "district": "",
+      "address": "城投大厦/科金大厦/齐鲁软件园/人工智能岛",
+      "operator": "",
+      "track": "",
+      "features": [
+        "首批51家入驻",
+        "2万㎡免租",
+        "3000P算力",
+        "100TB数据",
+        "50亿基金"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "jinan-city-001"
+      ]
+    },
+    {
+      "id": "comm-060",
+      "name": "星模湾OPC社区",
+      "city": "扬州",
+      "province": "江苏",
+      "district": "",
+      "address": "扬州",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "yangzhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-061",
+      "name": "光点π OPC社区",
+      "city": "扬州",
+      "province": "江苏",
+      "district": "",
+      "address": "扬州",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "yangzhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-062",
+      "name": "数智OPC社区",
+      "city": "扬州",
+      "province": "江苏",
+      "district": "",
+      "address": "扬州",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "yangzhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-063",
+      "name": "海曙AiOPC社区(5个)",
+      "city": "宁波",
+      "province": "浙江",
+      "district": "海曙",
+      "address": "白云街道/鼓楼街道/月湖街道等",
+      "operator": "",
+      "track": "",
+      "features": [
+        "已建5个",
+        "2026年底10+个",
+        "500+工位",
+        "算力50%补贴"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "ningbo-haiceng-001"
+      ]
+    },
+    {
+      "id": "comm-064",
+      "name": "魔法空间",
+      "city": "无锡",
+      "province": "江苏",
+      "district": "高新区",
+      "address": "无锡软件园",
+      "operator": "",
+      "track": "",
+      "features": [
+        "OPC十条",
+        "产品/研发/平台/人才"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "wuxi-gaoxin-001"
+      ]
+    },
+    {
+      "id": "comm-065",
+      "name": "洪山·暖村数字游民村",
+      "city": "无锡",
+      "province": "江苏",
+      "district": "高新区",
+      "address": "无锡",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "wuxi-gaoxin-001"
+      ]
+    },
+    {
+      "id": "comm-066",
+      "name": "宿迁OPC创业空间(10个)",
+      "city": "宿迁",
+      "province": "江苏",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "73户已入驻",
+        "零租工位",
+        "百余种AI工具"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "suqian-city-001"
+      ]
+    },
+    {
+      "id": "comm-067",
+      "name": "松山湖模立方OPC社区",
+      "city": "东莞",
+      "province": "广东",
+      "district": "",
+      "address": "松山湖",
+      "operator": "",
+      "track": "",
+      "features": [
+        "首期6000㎡",
+        "1+2莞深港跨域",
+        "首批7个AI+制造项目",
+        "四大核心区"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "dongguan-city-001"
+      ]
+    },
+    {
+      "id": "comm-068",
+      "name": "佛深OPC联盟孵化基地",
+      "city": "佛山",
+      "province": "广东",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "三年三免",
+        "30+工位"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "foshan-city-001"
+      ]
+    },
+    {
+      "id": "comm-069",
+      "name": "西安AI OPC创新社区",
+      "city": "西安",
+      "province": "陕西",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "蒜泥科技运营",
+        "国家超算算力",
+        "商汤/京东云/阿里云",
+        "全链条服务"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "xian-city-001"
+      ]
+    },
+    {
+      "id": "comm-070",
+      "name": "超级合子OPC共生社区",
+      "city": "厦门",
+      "province": "福建",
+      "district": "",
+      "address": "厦门软件园二期",
+      "operator": "",
+      "track": "",
+      "features": [
+        "福建首个OPC社区",
+        "自建算力",
+        "算力券",
+        "AIGC工作站",
+        "300+创业者对接"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "xiamen-city-001"
+      ]
+    },
+    {
+      "id": "comm-071",
+      "name": "福州数字产业基地OPC空间",
+      "city": "福州",
+      "province": "福建",
+      "district": "",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "2800㎡",
+        "OPC联盟12家",
+        "福AI夜校"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "fuzhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-072",
+      "name": "庾园AI青创空间",
+      "city": "昆明",
+      "province": "云南",
+      "district": "西山",
+      "address": "西山区福海街道",
+      "operator": "",
+      "track": "",
+      "features": [
+        "云南首个OPC社区",
+        "零租金",
+        "1V1服务",
+        "AI算力Token",
+        "青创启航贷"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "kunming-city-001"
+      ]
+    },
+    {
+      "id": "comm-073",
+      "name": "创港OPC社区",
+      "city": "珠海",
+      "province": "广东",
+      "district": "香洲",
+      "address": "珠海香洲区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "3000㎡",
+        "3年免费",
+        "算力券200万/年",
+        "模型券100万/年",
+        "3年培育500家"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "zhuhai-city-001"
+      ]
+    },
+    {
+      "id": "comm-074",
+      "name": "海口高新区OPC国际社区",
+      "city": "海口",
+      "province": "海南",
+      "district": "高新区",
+      "address": "",
+      "operator": "",
+      "track": "",
+      "features": [
+        "实验室最高500万",
+        "算力补贴50万",
+        "应用项目100万",
+        "免费工位",
+        "一站式服务"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "haikou-city-001"
+      ]
+    },
+    {
+      "id": "comm-075",
+      "name": "天宅和平园·模式创新社区",
+      "city": "天津",
+      "province": "天津",
+      "district": "滨海高新区",
+      "address": "天津滨海高新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "五个一服务",
+        "培训+双选会"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "tianjin-city-001"
+      ]
+    },
+    {
+      "id": "comm-076",
+      "name": "河北AI OPC成长基地",
+      "city": "石家庄",
+      "province": "河北",
+      "district": "",
+      "address": "石家庄",
+      "operator": "",
+      "track": "",
+      "features": [
+        "河北首个",
+        "四免一减一供",
+        "零负担"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shijiazhuang-city-001"
+      ]
+    },
+    {
+      "id": "comm-077",
+      "name": "紫琅智谷OPC创新社区",
+      "city": "南通",
+      "province": "江苏",
+      "district": "",
+      "address": "南通",
+      "operator": "",
+      "track": "",
+      "features": [
+        "全市首个",
+        "2万㎡"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "nantong-city-001"
+      ]
+    },
+    {
+      "id": "comm-078",
+      "name": "盐力超体OPC创新社区",
+      "city": "盐城",
+      "province": "江苏",
+      "district": "",
+      "address": "盐城大数据产业园",
+      "operator": "",
+      "track": "",
+      "features": [
+        "211行动",
+        "7类业态",
+        "20家入驻"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "yancheng-city-001"
+      ]
+    },
+    {
+      "id": "comm-079",
+      "name": "花果山下OPC社区",
+      "city": "连云港",
+      "province": "江苏",
+      "district": "",
+      "address": "海州数字科技大厦",
+      "operator": "",
+      "track": "",
+      "features": [
+        "阿里云底座",
+        "OPC专属创业贷",
+        "全链赋能"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "lianyungang-city-001"
+      ]
+    },
+    {
+      "id": "comm-080",
+      "name": "徐州OPC社区",
+      "city": "徐州",
+      "province": "江苏",
+      "district": "",
+      "address": "孔庙街区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "xuzhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-081",
+      "name": "AGI青创共同体",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "余杭",
+      "address": "余杭区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "AI方向"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "hangzhou-yuhang-001"
+      ]
+    },
+    {
+      "id": "comm-082",
+      "name": "梦想小镇OPC专区",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "余杭",
+      "address": "未来科技城",
+      "operator": "",
+      "track": "",
+      "features": [
+        "免费办公",
+        "电商供应链",
+        "最高50万启动资金"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "hangzhou-yuhang-001"
+      ]
+    },
+    {
+      "id": "comm-083",
+      "name": "零界魔方",
+      "city": "上海",
+      "province": "上海",
+      "district": "浦东",
+      "address": "临港",
+      "operator": "",
+      "track": "",
+      "features": [
+        "办公住宿双免",
+        "月费仅90元"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "shanghai-pudong-002"
+      ]
+    },
+    {
+      "id": "comm-084",
+      "name": "仲恺AI产业园",
+      "city": "惠州",
+      "province": "广东",
+      "district": "",
+      "address": "仲恺高新区",
+      "operator": "",
+      "track": "",
+      "features": [
+        "产值533亿",
+        "511个项目",
+        "计划突破600亿"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "huizhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-085",
+      "name": "润泽智算中心",
+      "city": "惠州",
+      "province": "广东",
+      "district": "",
+      "address": "大亚湾数据产业园",
+      "operator": "",
+      "track": "",
+      "features": [
+        "大湾区首个超大规模智算中心",
+        "2026年建成"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "huizhou-city-001"
+      ]
+    },
+    {
+      "id": "comm-086",
+      "name": "创思孵翼启Job·OPC社区",
+      "city": "北京",
+      "province": "北京",
+      "district": "丰台",
+      "address": "丰台区",
+      "operator": "",
+      "track": "",
+      "features": [],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "beijing-fengtai-001"
+      ]
+    },
+    {
+      "id": "comm-087",
+      "name": "中原科技城OPC生态联盟",
+      "city": "郑州",
+      "province": "河南",
+      "district": "郑东新区",
+      "address": "郑州中原科技城投资促进中心",
+      "operator": "郑州数据交易中心+曙光信息+张江智慧岛+河南省人工智能协会",
+      "track": "",
+      "features": [
+        "拎脑入驻",
+        "国家超算郑州中心算力",
+        "数据交易生态",
+        "全生命周期服务"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "zhengzhou-zhengdong-001"
+      ]
+    },
+    {
+      "id": "comm-088",
+      "name": "粤港澳大湾区（广东）创新创业孵化基地",
+      "city": "广州",
+      "province": "广东",
+      "district": "天河",
+      "address": "广州市天河区天慧路10、12、14号",
+      "operator": "广东省人社厅+广州市天河区人民政府 共建",
+      "track": "人工智能 / 新一代信息技术 / 节能环保 / 高端装备制造 / 新材料 / 生物医药与健康 / 新能源",
+      "features": [
+        "港澳青年创新创业龙头基地",
+        "6.65万㎡可容纳200家孵化企业",
+        "累计引入239个项目 港澳项目占90%+",
+        "入驻项目累计获融资超3.62亿元",
+        "三大服务角色：青创护航官/青创链接者/超级组局人",
+        "创业之星展区(科创型/成长型/港澳特色)",
+        "总投资超7亿 / 三大智慧系统 / 六大服务平台 / 八大功能分区"
+      ],
+      "source": "https://www.gz.gov.cn/zt/ljgaqngcwqwl/lcgz/sczx/content/post_7191005.html",
+      "verified": true,
+      "policy_ids": [
+        "guangzhou-tianhe-001"
+      ]
+    },
+    {
+      "id": "comm-089",
+      "name": "天府软件π立方OPC社区",
+      "city": "成都",
+      "province": "四川",
+      "district": "高新",
+      "address": "成都高新区天府软件园D6负一层B22号",
+      "operator": "天府软件园",
+      "track": "数字文创 / 人工智能",
+      "features": [
+        "全国首个AI+数字文创OPC社区",
+        "近10,000㎡ 1-10人超级个体",
+        "最长1年免租 + 基础服务全免",
+        "15亿产业基金直投",
+        "华为云7折算力 + AI智能体评测",
+        "一站式工商/法务/财税/政策申报",
+        "滚动评审 一周入驻 · 028-86031523"
+      ],
+      "source": "https://www.tianfusoftwarepark.com/",
+      "verified": true,
+      "policy_ids": [
+        "chengdu-city-001"
+      ]
+    },
+    {
+      "id": "comm-090",
+      "name": "蓉数OPC社区",
+      "city": "成都",
+      "province": "四川",
+      "district": "高新",
+      "address": "成都市高新区天府大道北段966号·天府国际金融中心9号楼",
+      "operator": "成都数据集团",
+      "track": "AI应用 / 数据要素",
+      "features": [
+        "2026-03-31开园",
+        "180天免租",
+        "天府智算中心算力配额",
+        "30类API接口 + 低代码平台",
+        "首批13个创业方入驻",
+        "知识产权归开发者所有",
+        "123个AI共享工位 + 直播间 + 剪辑室 + 路演厅"
+      ],
+      "source": "https://m.cd.bendibao.com/live/206070.shtm",
+      "verified": true,
+      "policy_ids": [
+        "chengdu-city-001"
+      ]
+    },
+    {
+      "id": "comm-091",
+      "name": "诸葛空间π立方OPC社区",
+      "city": "成都",
+      "province": "四川",
+      "district": "高新",
+      "address": "成都高新区新川创新科技园",
+      "operator": "成都高投 + 36氪",
+      "track": "AI / 硬科技",
+      "features": [
+        "一期4,000㎡（三期达1万㎡）",
+        "180天三阶验证陪跑",
+        "百亿级基金对接",
+        "6000+投资机构 / 18万+项目库"
+      ],
+      "source": "https://cd.bendibao.com/live/2026310/206080.shtm",
+      "verified": true,
+      "policy_ids": [
+        "chengdu-city-001"
+      ]
+    },
+    {
+      "id": "comm-092",
+      "name": "长岛π立方OPC社区",
+      "city": "成都",
+      "province": "四川",
+      "district": "天府新区",
+      "address": "天府长岛数字文创园",
+      "operator": "",
+      "track": "数字文创",
+      "features": [
+        "筹备中",
+        "天府长岛数字文创园内"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": [
+        "chengdu-city-001"
+      ]
+    },
+    {
+      "id": "comm-093",
+      "name": "九方万格个人经济体产业园",
+      "city": "广州",
+      "province": "广东",
+      "district": "天河",
+      "address": "天河软件产业园（广州信息港）",
+      "operator": "九方万格",
+      "track": "个人经济体 / 数字蜂巢",
+      "features": [
+        "全国首家个人经济体产业园",
+        "数字蜂巢赋能一人公司",
+        "对接天河软件园生态"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": []
+    },
+    {
+      "id": "comm-094",
+      "name": "OPC社区·她空间",
+      "city": "广州",
+      "province": "广东",
+      "district": "天河",
+      "address": "天河区",
+      "operator": "",
+      "track": "女性创业 / OPC",
+      "features": [
+        "1000㎡",
+        "聚焦女性OPC创业者"
+      ],
+      "source": "",
+      "verified": false,
+      "policy_ids": []
+    },
+    {
+      "id": "comm-095",
+      "name": "龙岗区国际机器人产业园OPC社区",
+      "city": "深圳",
+      "province": "广东",
+      "district": "龙岗",
+      "address": "深圳市龙岗区坂田核心板块",
+      "operator": "深圳市龙岗区人工智能（机器人）署 / 园区运营方",
+      "track": "人工智能 / 机器人 / OPC",
+      "features": [
+        "3㎡/工位",
+        "超长免租期",
+        "极简注册快速办结",
+        "免费算力与大模型创作",
+        "路演厅和创客公寓"
+      ],
+      "source": "https://www.lg.gov.cn/lgjqrs/gkmlpt/content/12/12741/post_12741116.html",
+      "source_url": "https://www.lg.gov.cn/lgjqrs/gkmlpt/content/12/12741/post_12741116.html",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-longgang-002"
+      ]
+    },
+    {
+      "id": "comm-096",
+      "name": "长三角（无锡）国际人才港EAST+OPC创新社区",
+      "city": "无锡",
+      "province": "江苏",
+      "district": "锡山区",
+      "address": "无锡锡东新城 / 长三角（无锡）国际人才港",
+      "operator": "锡东新城商务区",
+      "track": "AI应用 / 出海服务 / OpenClaw智能体",
+      "features": [
+        "最长36个月免租",
+        "项目入驻大礼包",
+        "政策智能问答",
+        "AI+服务专窗",
+        "算力金融高校技术伙伴"
+      ],
+      "source": "https://www.wuxi.gov.cn/doc/2026/03/15/4745665.shtml",
+      "source_url": "https://www.wuxi.gov.cn/doc/2026/03/15/4745665.shtml",
+      "verified": true,
+      "policy_ids": [
+        "wuxi-xidong-001"
+      ]
+    },
+    {
+      "id": "comm-097",
+      "name": "保定数创港OPC孵化载体",
+      "city": "保定",
+      "province": "河北",
+      "district": "",
+      "address": "保定市各级孵化器、创业孵化基地、数字产业园区及政务服务中心",
+      "operator": "保定市数据局 / 各县区",
+      "track": "人工智能 / 数据服务 / OPC",
+      "features": [
+        "一年免费办公场地",
+        "智能体开发工具",
+        "运行测试环境",
+        "开发实训",
+        "合规指导"
+      ],
+      "source": "https://wap.baoding.gov.cn/wap-content-159-538877.html",
+      "source_url": "https://wap.baoding.gov.cn/wap-content-159-538877.html",
+      "verified": true,
+      "policy_ids": [
+        "baoding-city-001"
+      ]
+    },
+    {
+      "id": "comm-098",
+      "name": "南充新质生产力创新产业园OPC社区",
+      "city": "南充",
+      "province": "四川",
+      "district": "",
+      "address": "南充新质生产力创新产业园",
+      "operator": "南充市科技局等",
+      "track": "人工智能 / OPC / 跨境电商",
+      "features": [
+        "共享算力节点",
+        "AI实训平台",
+        "轻量化财务法务服务点",
+        "拎包入驻"
+      ],
+      "source": "https://www.nanchong.gov.cn/kjj/xwdt/tzgg/202604/t20260423_2328194.html",
+      "source_url": "https://www.nanchong.gov.cn/kjj/xwdt/tzgg/202604/t20260423_2328194.html",
+      "verified": true,
+      "policy_ids": [
+        "nanchong-city-001"
+      ]
+    },
+    {
+      "id": "comm-099",
+      "name": "海口龙华特色OPC社区",
+      "city": "海口",
+      "province": "海南",
+      "district": "龙华",
+      "address": "海口市龙华区",
+      "operator": "龙华区科技工信局 / 专业化运营主体",
+      "track": "AI短剧 / 动漫 / 数字内容出海 / OPC",
+      "features": [
+        "社区运营主体最高50万奖励",
+        "企业发展服务券",
+        "OpenClaw部署",
+        "1000万Tokens技术支持",
+        "跨境数据服务"
+      ],
+      "source": "https://m.hinews.cn/page?m=1&n=2810034&s=1044",
+      "source_url": "https://m.hinews.cn/page?m=1&n=2810034&s=1044",
+      "verified": true,
+      "policy_ids": [
+        "haikou-longhua-001"
+      ]
+    },
+    {
+      "id": "comm-100",
+      "name": "大连高新区OPC创业社区",
+      "city": "大连",
+      "province": "辽宁",
+      "district": "高新区",
+      "address": "大连高新技术产业园区",
+      "operator": "大连高新区科技创新局",
+      "track": "人工智能 / OPC",
+      "features": [
+        "OPC试行措施征求意见",
+        "人工智能创业新模式",
+        "政策兑现平台衔接"
+      ],
+      "source": "https://www.dlhitech.gov.cn/news/view_78871.html",
+      "source_url": "https://www.dlhitech.gov.cn/news/view_78871.html",
+      "verified": true,
+      "policy_ids": [
+        "dalian-gaoxin-001"
+      ]
+    },
+    {
+      "id": "comm-101",
+      "name": "渝中区人工智能OPC社区矩阵",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "渝中",
+      "address": "重庆市渝中区",
+      "operator": "重庆市渝中区经济和信息化委员会",
+      "track": "软件和信息服务业 / 人工智能 / OPC",
+      "features": [
+        "区级社区矩阵",
+        "软件信息服务业高质量发展",
+        "工作方案征求意见"
+      ],
+      "source": "https://www.cqyz.gov.cn/igixmj/gkyjzj/202604/tOpinion_7519.html",
+      "source_url": "https://www.cqyz.gov.cn/igixmj/gkyjzj/202604/tOpinion_7519.html",
+      "verified": true,
+      "policy_ids": [
+        "chongqing-yuzhong-001"
+      ]
+    },
+    {
+      "id": "comm-102",
+      "name": "深港硬科技加速器 / 大公坊AI硬件OPC·hub",
+      "city": "深圳",
+      "province": "广东",
+      "district": "宝安",
+      "address": "宝安区宝中片区 / 大公坊iMakerbase国际加速器",
+      "operator": "大公坊iMakerbase / 宝安区相关单位",
+      "track": "AI硬件 / 智能制造 / OPC",
+      "features": [
+        "深圳首批OPC社区布局",
+        "约0.6万㎡",
+        "技术支持、供应链协同、资本对接",
+        "覆盖50多个国家和地区服务网络"
+      ],
+      "source": "https://gxj.sz.gov.cn/attachment/1/1672/1672469/12602272.pdf",
+      "source_url": "https://gxj.sz.gov.cn/attachment/1/1672/1672469/12602272.pdf",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-city-001",
+        "shenzhen-baoan-001"
+      ]
+    },
+    {
+      "id": "comm-103",
+      "name": "航城·领航OPC示范社区",
+      "city": "深圳",
+      "province": "广东",
+      "district": "宝安",
+      "address": "宝安区航城街道大公坊AI硬件OPC国际社区",
+      "operator": "航城街道 / 大公坊iMakerbase",
+      "track": "AI硬件 / 临空经济 / OPC",
+      "features": [
+        "三年培育OPC硬件创业生态",
+        "到2028年建设5个OPC示范社区",
+        "集聚孵化200家以上OPC团队",
+        "OPC工商绿色专窗",
+        "低成本工位和梯度办公空间"
+      ],
+      "source": "https://static.nfnews.com/content/202604/03/c12307562.html?enterColumnId=17",
+      "source_url": "https://static.nfnews.com/content/202604/03/c12307562.html?enterColumnId=17",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-baoan-001",
+        "shenzhen-city-001"
+      ]
+    },
+    {
+      "id": "comm-104",
+      "name": "光引粒·人工智能创想空间",
+      "city": "深圳",
+      "province": "广东",
+      "district": "光明",
+      "address": "光明区华强科技生态园9栋15-18层 / 凤凰城片区",
+      "operator": "华强集团 / 深圳理工大学技术合作",
+      "track": "人工智能 / 智能芯片 / 具身智能 / OPC",
+      "features": [
+        "深圳首批OPC社区布局",
+        "首期超1万㎡",
+        "拎包入驻",
+        "最高3年租金减免",
+        "技术研发、场景对接、融资对接"
+      ],
+      "source": "https://gxj.sz.gov.cn/attachment/1/1672/1672469/12602272.pdf",
+      "source_url": "https://gxj.sz.gov.cn/attachment/1/1672/1672469/12602272.pdf",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-city-001"
+      ]
+    },
+    {
+      "id": "comm-105",
+      "name": "南太人工智能众创空间",
+      "city": "深圳",
+      "province": "广东",
+      "district": "光明",
+      "address": "光明区凤凰街道云创谷园区1栋7楼",
+      "operator": "南太人工智能众创空间运营方",
+      "track": "人工智能 / 科学城转化 / OPC",
+      "features": [
+        "2200㎡孵化面积",
+        "12个月租金及水电减免",
+        "共享会议室、洽谈区、路演区",
+        "产业资源支持、资本对接和应用场景开放"
+      ],
+      "source": "https://www.baoanone.com/content216630.html",
+      "source_url": "https://www.baoanone.com/content216630.html",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-city-001"
+      ]
+    },
+    {
+      "id": "comm-106",
+      "name": "锦绣科学园OPC共智人才创新创业园区",
+      "city": "深圳",
+      "province": "广东",
+      "district": "龙华",
+      "address": "龙华区锦绣科学园",
+      "operator": "龙华区 / 锦绣科学园相关运营方",
+      "track": "AI智能体 / 人才创新 / OPC",
+      "features": [
+        "首期2500㎡空间",
+        "已接待企业咨询超10批",
+        "吸引AI外贸选品、AI机器人数据采集等项目意向入驻",
+        "龙华OPC核心载体"
+      ],
+      "source": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/gqdt/content/post_12757158.html",
+      "source_url": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/gqdt/content/post_12757158.html",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-longhua-001",
+        "shenzhen-city-001"
+      ]
+    },
+    {
+      "id": "comm-107",
+      "name": "盛荟城大浪OPC人才服务产业园",
+      "city": "深圳",
+      "province": "广东",
+      "district": "龙华",
+      "address": "龙华区大浪街道盛荟城",
+      "operator": "大浪街道 / 盛荟城园区运营方",
+      "track": "AI人才服务 / 产业载体 / OPC",
+      "features": [
+        "大浪街道首个OPC园区",
+        "已投用产业空间约20万㎡",
+        "集聚70余家优质企业",
+        "2025年园区年产值超160亿元"
+      ],
+      "source": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/gqdt/content/post_12757158.html",
+      "source_url": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/gqdt/content/post_12757158.html",
+      "verified": true,
+      "policy_ids": [
+        "shenzhen-longhua-001",
+        "shenzhen-city-001"
+      ]
+    },
+    {
+      "id": "comm-108",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区广州站",
+      "city": "广州",
+      "province": "广东",
+      "district": "海珠",
+      "address": "广州阿里中心北塔1楼",
+      "operator": "阿里不动产团队 / 阿里云创新中心生态",
+      "track": "AI创业 / 数字经济 / OPC落地载体",
+      "features": [
+        "阿里云官方Y/OUR SPACE站点，广州站地址已公开",
+        "聚焦AI时代OPC、超级个体和初创团队",
+        "可作为海珠琶洲落地、政策指导和创业对接入口",
+        "可重点咨询阿里云创业者计划、星云扶持计划、算力券和政策申报辅导",
+        "工位价格、押金和最短租期未公开，需现场或官方联系人确认",
+        "不是政府补贴申报入口，入驻不等于自动获得补贴"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "guangzhou-haizhu-002",
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-109",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区全国网络",
+      "city": "全国",
+      "province": "全国",
+      "district": "",
+      "address": "全国24城31站（阿里云公开口径）",
+      "operator": "阿里巴巴 / 阿里云创新中心生态",
+      "track": "AI创业 / OPC / 超级个体 / 初创团队",
+      "features": [
+        "全国24城31站",
+        "链接10000+创业者",
+        "免费畅行3次",
+        "入驻空间8折起",
+        "阿里生态与资源网络"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-110",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州西溪站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "余杭",
+      "address": "杭州市余杭区五常街道爱橙街1号阿里巴巴数字生态创新园7号楼2楼",
+      "operator": "阿里巴巴创业社区",
+      "track": "AI+电商 / 阿里校友生态",
+      "features": [
+        "首个Y/OUR SPACE站点",
+        "毗邻阿里巴巴集团总部和淘天集团总部",
+        "空间服务、企业服务和产业服务全链路支持"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-111",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州未科站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "余杭",
+      "address": "杭州市余杭区五常街道思凯路189号阿里中心·未科",
+      "operator": "余杭区政府 / 阿里巴巴",
+      "track": "AI+产业生态 / 模域空间",
+      "features": [
+        "模域空间先导区",
+        "灵活办公、技术工具、资源对接与社群生态",
+        "已入驻超200位AI+创业者",
+        "钉钉总部园区"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-112",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州延中站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "拱墅",
+      "address": "杭州市拱墅区延安路462-546延中大楼A座1-2层",
+      "operator": "城投资产集团 / 阿里巴巴",
+      "track": "OPC服务 / 城市核心商圈",
+      "features": [
+        "武林核心商圈",
+        "双地铁直达",
+        "步行可达西湖",
+        "办公、交流和成长社区"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-113",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州云谷站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "西湖",
+      "address": "杭州市西湖区三墩镇灯彩街1009号云谷中心B1幢",
+      "operator": "阿里云 / 魔搭社区 / 西湖区政府",
+      "track": "AI开发者 / 魔搭社区",
+      "features": [
+        "毗邻阿里云总部园区",
+        "魔搭社区（杭州）开发者中心",
+        "已入驻超200位AI开发者",
+        "AI开发者单工位3折（300元/月）"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-114",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州西湖站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "西湖",
+      "address": "杭州市西湖区古荡街道西溪路556号阿里中心·西湖2号大堂2F",
+      "operator": "阿里巴巴创业社区",
+      "track": "AI+医疗健康 / AI+金融科技 / AI+智能生活",
+      "features": [
+        "西湖与西溪生态",
+        "双地铁交通",
+        "联动天目里和黄龙CBD",
+        "阿里、蚂蚁、浙大、浙商资源协同"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-115",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区杭州滨江站",
+      "city": "杭州",
+      "province": "浙江",
+      "district": "滨江",
+      "address": "杭州市滨江区滨兴路1866号阿里中心·杭州滨江5号楼1楼",
+      "operator": "阿里巴巴创业社区 / 滨江区相关生态",
+      "track": "AI+跨境 / 阿里跨境业务生态",
+      "features": [
+        "滨江区首批人工智能OPC产业社区",
+        "空间、算力、金融、场景护航",
+        "国际站跨境创业孵化中心",
+        "1688全球选品中心",
+        "跨境客户单工位8折（800元/月）"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "hangzhou-binjiang-001"
+      ]
+    },
+    {
+      "id": "comm-116",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区上海徐汇站",
+      "city": "上海",
+      "province": "上海",
+      "district": "徐汇",
+      "address": "上海市徐汇区龙华街道龙耀路8号阿里巴巴徐汇滨江园区X区-X4/X5-3楼/4楼",
+      "operator": "阿里亲橙超级创业者社区",
+      "track": "人工智能 / 阿里生态 / 创业社区",
+      "features": [
+        "西岸一线江景",
+        "地铁沿线",
+        "对接区级政策",
+        "阿里加油包、生态加油包、创友加油包"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "shanghai-xuhui-001"
+      ]
+    },
+    {
+      "id": "comm-117",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区深圳后海站",
+      "city": "深圳",
+      "province": "广东",
+      "district": "南山",
+      "address": "深圳市南山区科苑南路3331号阿里中心·深圳T2栋9楼902单元",
+      "operator": "深圳阿里中心 / 全球服务中心Go Global",
+      "track": "跨境出海 / 阿里生态 / 深圳湾",
+      "features": [
+        "跨境企业出海第一站",
+        "品牌展示、专业培训、资源对接、政策链接、孵化加速",
+        "深圳湾一线海景"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "shenzhen-nanshan-001"
+      ]
+    },
+    {
+      "id": "comm-118",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区上海虹桥站",
+      "city": "上海",
+      "province": "上海",
+      "district": "闵行",
+      "address": "上海市闵行虹桥商务区阿里中心T2楼-5F",
+      "operator": "阿里巴巴创业社区",
+      "track": "商务区 / 阿里生态 / 创业办公",
+      "features": [
+        "虹桥商务区站点",
+        "阿里中心办公空间",
+        "适合上海西部商务生态对接"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-119",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区重庆站",
+      "city": "重庆",
+      "province": "重庆",
+      "district": "南岸",
+      "address": "重庆市南岸区复兴街9号中迅时代大厦30F",
+      "operator": "阿里巴巴创业社区",
+      "track": "重庆OPC / 城市创业服务",
+      "features": [
+        "重庆站公开地址",
+        "可对接阿里生态和城市创业服务"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-120",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区郑州站",
+      "city": "郑州",
+      "province": "河南",
+      "district": "管城回族",
+      "address": "郑州市管城回族区升龙广场3号楼B座35F",
+      "operator": "阿里巴巴创业社区",
+      "track": "郑州OPC / 中原创业生态",
+      "features": [
+        "郑州站公开地址",
+        "适合河南/中原区域创业者对接阿里生态"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-121",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区南昌站",
+      "city": "南昌",
+      "province": "江西",
+      "district": "红谷滩",
+      "address": "江西省南昌市红谷滩新区金融大街777号博能金融中心14楼",
+      "operator": "阿里巴巴创业社区",
+      "track": "南昌OPC / 金融商务区",
+      "features": [
+        "南昌站公开地址",
+        "红谷滩金融商务区"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-122",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区合肥站",
+      "city": "合肥",
+      "province": "安徽",
+      "district": "蜀山",
+      "address": "安徽省合肥市蜀山区怀宁路置地广场A座14F",
+      "operator": "阿里巴巴创业社区",
+      "track": "合肥OPC / 科创创业服务",
+      "features": [
+        "合肥站公开地址",
+        "可与合肥AI/声谷生态协同"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "hefei-city-001"
+      ]
+    },
+    {
+      "id": "comm-123",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区厦门站",
+      "city": "厦门",
+      "province": "福建",
+      "district": "思明",
+      "address": "厦门市思明区华润大厦A座22F",
+      "operator": "阿里巴巴创业社区",
+      "track": "厦门OPC / 海西创业生态",
+      "features": [
+        "厦门站公开地址",
+        "思明区核心商务空间"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-124",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区海口站",
+      "city": "海口",
+      "province": "海南",
+      "district": "龙华",
+      "address": "海口市龙华区复兴城国际离岸创新大厦5F",
+      "operator": "阿里巴巴创业社区",
+      "track": "海口OPC / 自贸港 / 离岸创新",
+      "features": [
+        "海口站公开地址",
+        "复兴城国际离岸创新大厦",
+        "适合海南自贸港创业对接"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "haikou-longhua-001"
+      ]
+    },
+    {
+      "id": "comm-125",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区昆明站",
+      "city": "昆明",
+      "province": "云南",
+      "district": "五华",
+      "address": "云南省昆明市五华区科普路五华科创大厦A栋16楼",
+      "operator": "阿里巴巴创业社区",
+      "track": "昆明OPC / 西南科创",
+      "features": [
+        "昆明站公开地址",
+        "五华科创大厦"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-126",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区石家庄站",
+      "city": "石家庄",
+      "province": "河北",
+      "district": "长安",
+      "address": "石家庄市长安区泰勒中心D座26层",
+      "operator": "阿里巴巴创业社区",
+      "track": "石家庄OPC / 河北创业服务",
+      "features": [
+        "石家庄站公开地址",
+        "河北区域创业者阿里生态入口"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001"
+      ]
+    },
+    {
+      "id": "comm-127",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区长沙站",
+      "city": "长沙",
+      "province": "湖南",
+      "district": "开福",
+      "address": "长沙市开福区富兴时代T3栋27楼",
+      "operator": "阿里巴巴创业社区",
+      "track": "长沙OPC / 华中创业生态",
+      "features": [
+        "长沙站公开地址",
+        "开福区商务空间"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "changsha-city-001"
+      ]
+    },
+    {
+      "id": "comm-128",
+      "name": "Y/OUR SPACE 阿里巴巴创业社区苏州站",
+      "city": "苏州",
+      "province": "江苏",
+      "district": "工业园区",
+      "address": "苏州市工业园区苏州大道西9号中海财富中心东塔18F阿里中心",
+      "operator": "阿里巴巴创业社区",
+      "track": "苏州OPC / 工业园区 / 阿里生态",
+      "features": [
+        "苏州站公开地址",
+        "工业园区阿里中心",
+        "可与苏州OPC社区政策协同"
+      ],
+      "source": "https://startup.aliyun.com/info/1093722.html",
+      "source_url": "https://startup.aliyun.com/info/1093722.html",
+      "verified": true,
+      "updated_at": "2026-05-22",
+      "policy_ids": [
+        "aliyun-opc-space-001",
+        "suzhou-city-001"
+      ]
+    }
+  ]
+}
