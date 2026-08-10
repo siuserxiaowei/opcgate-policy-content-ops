@@ -18,7 +18,7 @@
 - 数据快照：2026-05-22
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
-- 新版部署源码对应 GitHub commit：`39432f0`
+- 新版部署源码对应 GitHub commit：`39432f0`；正式环境验收证据提交为 `3738a56`
 - ModelScope 新版上传提交：`app.py` 与 `README.md` 两条在线提交；README 最新提交 `8cda79bd`
 - 部署状态：运行中
 - 展示名称：OPC Gate 空间匹配与申请助手
@@ -81,9 +81,9 @@
 - ModelScope Access Token 尚未配置，因此没有宣称 API-Inference 真实模型调用成功；当前证据只覆盖安全降级路径。
 - 报名方案（X）：<https://x.com/_HIT_SZ_/status/2086741225592213948>
 - 活动报名：2026-08-10 已提交成功，平台状态为“待审核”；审核通过前作品提交按钮被平台禁用。
-- 研习社创作手记：<https://modelscope.cn/learn/435575>
-- 参赛心得（X）：<https://x.com/_HIT_SZ_/status/2086744833922601129>
-- 仍待主办方审核报名后提交作品及额外内容激励链接。
+- 新版研习社创作手记：<https://modelscope.cn/learn/435588>
+- 旧定位参赛心得（X，仅作历史记录，不用于最终提交）：<https://x.com/_HIT_SZ_/status/2086744833922601129>
+- 仍待主办方审核报名后提交作品、补发新版公开参赛心得并提交额外内容激励链接。
 
 ## 报名与内容证据
 
@@ -93,8 +93,17 @@
 - 研习社封面：`submission/screenshots/modelscope-learn-cover.jpg`
   - 像素：1600 × 900
   - SHA-256：`39ee6c41650d024b2bf745e35fa5747c18011cbd66bcf89b832ae57dfe69742f`
-- 研习社文章截图：`submission/screenshots/modelscope-learn-article.jpg`
+- 旧版研习社文章截图（仅作历史记录）：`submission/screenshots/modelscope-learn-article.jpg`
   - 像素：2048 × 580
   - SHA-256：`5d9e8cad0e724540665e959fc330ce4cb720518c53d9db85b1bcbd87aacef26b`
+- 新版研习社封面：`submission/article-assets/modelscope-learn-cover-new.jpg`
+  - 像素：1600 × 900
+  - SHA-256：`c4159d090930ad07567cdf98e0d2d3f077ad8e620805a8b09cd49eb57b64e1d0`
+- 新版研习社正文配图：`submission/article-assets/01-product-entry.jpg`、`02-match-passports.jpg`、`03-compare-checklist.jpg`
+  - 像素：均为 1600 × 900
+  - SHA-256：`dfdf2540852b5f264acd08e15ab2c29a566a875b7857be4a4fa5cfacf353a3df`、`a6e71193eab48f3d009dea0eb080b495e8e0f7175231c47ee473381721257005`、`22e0e1ba15261253cf0e711e57ce658ca532b408e4f4e98911b315d3701c812c`
+- 新版研习社公开文章截图：`submission/screenshots/modelscope-learn-article-new.jpg`
+  - 像素：2048 × 802
+  - SHA-256：`108ebb2becf11a8e1546c9821234375e87acc6e9b5976a273cce281746d3660b`
 
 云端部署和报名提交已经完成；报名仍待审核，未经作品提交成功证据，不宣称作品已经参赛成功。
