@@ -105,5 +105,9 @@
 - 新版研习社公开文章截图：`submission/screenshots/modelscope-learn-article-new.jpg`
   - 像素：2048 × 802
   - SHA-256：`108ebb2becf11a8e1546c9821234375e87acc6e9b5976a273cce281746d3660b`
+- 小红书合规公开稿封面：`submission/article-assets/xiaohongshu-cover-new.jpg`
+  - 像素：1080 × 1350（3:4）
+  - SHA-256：`22d21330c81799a789fb61226d396c4878339131dee4207cf7ba71ba42b76bca`
+  - 由新版研习社横版封面等比缩放并补背景生成，标题、界面和视觉风格保持不变。
 
 云端部署和报名提交已经完成；报名仍待审核，未经作品提交成功证据，不宣称作品已经参赛成功。
