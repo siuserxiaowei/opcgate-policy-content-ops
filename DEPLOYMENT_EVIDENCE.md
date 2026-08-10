@@ -18,7 +18,7 @@
 - 数据快照：2026-05-22
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
-- 当前 GitHub commit：`de726b031d9c82e190246d7cdb9a509e1045649a`
+- 当前 GitHub commit：`96898e3861b046a2e0d7caff3be6c5668fbac71f`
 
 ## 自动化验证
 
