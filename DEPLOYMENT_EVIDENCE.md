@@ -34,6 +34,18 @@
 
 ## 本地 Gradio 截图证据
 
+新版空间匹配与申请工作台：
+
+- 桌面端完整搜索、推荐护照、两项比较与申请清单：`submission/screenshots/local-gradio-desktop-new.png`
+  - 像素：1425 × 4212
+  - SHA-256：`ea3660910adda644bd550615ea2397a374248cbbdd10371a5d35abb8a746c117`
+- 手机端完整搜索结果：`submission/screenshots/local-gradio-mobile-new.png`
+  - 像素：375 × 7263
+  - SHA-256：`4cc6861dfcc9c2e21d9e57563a8419677c48ef0ac81a3acfe16ec2c26e144ada`
+- 响应式结构检查：390 px 视口下 `scrollWidth=375`，无页面级横向溢出；桌面端 1440 px 视口下 `scrollWidth=1425`。
+
+以下两张为旧版政策内容工作流历史证据，不再代表当前提交方向：
+
 - 桌面端：`submission/screenshots/local-gradio-desktop.png`
   - 像素：1265 × 2225
   - SHA-256：`875b1ab2cc81ff3107c6e97071a381120a7bd7d579fbc941ac50332c2f5637fd`
@@ -42,7 +54,7 @@
   - SHA-256：`221a70e680f7cd494b515371912734afc6da440f83fe3152083e7acd74a899ab`
 - 手机端结构检查：页面 `scrollWidth=375`，390 px 视口无页面级横向溢出；宽政策表在组件内部滚动。
 
-## ModelScope 正式环境截图证据
+## ModelScope 正式环境截图证据（旧版，待新版替换）
 
 - 桌面端完整运行结果：`submission/screenshots/modelscope-desktop.jpg`
   - 像素：2033 × 2225

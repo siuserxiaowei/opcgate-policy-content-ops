@@ -12,6 +12,8 @@ __pycache__/
 submission/screenshots/*.png
 !submission/screenshots/local-gradio-desktop.png
 !submission/screenshots/local-gradio-mobile.png
+!submission/screenshots/local-gradio-desktop-new.png
+!submission/screenshots/local-gradio-mobile-new.png
 test-results/
 !test-results/
 test-results/*
