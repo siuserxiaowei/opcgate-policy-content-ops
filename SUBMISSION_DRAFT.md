@@ -8,5 +8,8 @@
 4. [`04-社媒参赛心得.md`](submission/04-社媒参赛心得.md)
 5. [`05-演示脚本.md`](submission/05-演示脚本.md)
 6. [`06-提交检查清单.md`](submission/06-提交检查清单.md)
+7. [`07-三平台报名发布稿.md`](submission/07-三平台报名发布稿.md)
+8. [`08-最终提交包.md`](submission/08-最终提交包.md)
+9. [`09-完成审计.md`](submission/09-完成审计.md)
 
 旧 VibeSocial 投稿材料保留在 Git 历史中，作为活动期间首次发布和实现演进的证据，不再用于本届表单。

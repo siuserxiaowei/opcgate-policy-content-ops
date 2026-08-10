@@ -39,9 +39,25 @@ class SubmissionAssetsTests(unittest.TestCase):
             "04-社媒参赛心得.md",
             "05-演示脚本.md",
             "06-提交检查清单.md",
+            "07-三平台报名发布稿.md",
+            "08-最终提交包.md",
+            "09-完成审计.md",
         ]
         for filename in required:
             self.assertTrue((ROOT / "submission" / filename).is_file(), filename)
+
+    def test_final_pack_uses_current_public_links_and_has_no_private_contact_data(self):
+        final_pack = (ROOT / "submission" / "08-最终提交包.md").read_text(encoding="utf-8")
+        public_copy = (ROOT / "submission" / "07-三平台报名发布稿.md").read_text(encoding="utf-8")
+        self.assertIn("https://modelscope.cn/learn/435588", final_pack)
+        self.assertNotIn("https://modelscope.cn/learn/435575", final_pack)
+        for private_value in ["18507520846", "siuserxy@gmail.com", "黄佳伟"]:
+            self.assertNotIn(private_value, public_copy)
+
+    def test_xiaohongshu_cover_exists(self):
+        cover = ROOT / "submission" / "article-assets" / "xiaohongshu-cover-new.jpg"
+        self.assertTrue(cover.is_file())
+        self.assertGreater(cover.stat().st_size, 10_000)
 
 
 if __name__ == "__main__":
