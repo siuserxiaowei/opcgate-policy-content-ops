@@ -2,6 +2,8 @@ node_modules/
 .wrangler/
 .dev.vars
 *.log
+.coverage
+htmlcov/
 .DS_Store
 .venv*/
 __pycache__/

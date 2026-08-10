@@ -1,9 +1,8 @@
-"""OPC Gate 政策内容运营助手 · ModelScope Studio entrypoint.
+"""OPC Gate 空间匹配与申请助手 · ModelScope Studio entrypoint.
 
-The deterministic analysis path is intentionally usable without an API token.
-When MODELSCOPE_ACCESS_TOKEN is configured, a ModelScope API-Inference model may
-rewrite the evidence-bound draft; the result is accepted only after a second
-deterministic boundary scan.
+创业者填写城市、行业、项目阶段与服务需求后，应用从 OPC Gate 的
+公开载体数据中生成可解释的空间推荐、2–3 项比较和申请准备清单。
+推荐只用于信息筛选，不替代运营方审核，也不会伪造申请入口。
 """
 
 from __future__ import annotations
@@ -11,38 +10,44 @@ from __future__ import annotations
 import html
 import ipaddress
 import json
-import os
 import re
-import urllib.error
-import urllib.request
-from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
 from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parent
-PRODUCT_NAME = "OPC Gate 政策内容运营助手"
-MODEL_ID = os.getenv("MODELSCOPE_MODEL_ID", "Qwen/Qwen3.5-35B-A3B")
-MODELSCOPE_BASE_URL = "https://api-inference.modelscope.cn/v1/chat/completions"
-MAX_INPUT_CHARS = 1800
+PRODUCT_NAME = "OPC Gate 空间匹配与申请助手"
+MAX_DESCRIPTION_CHARS = 600
 
-CONCEPTS = {
-    "AI 智能体": ("ai", "人工智能", "智能体", "agent", "大模型", "模型", "mcp", "openclaw"),
-    "OPC 创业": ("opc", "一人公司", "独立开发", "超级个体", "创业", "初创", "单人公司"),
-    "算力与工具": ("算力", "token", "云服务", "模型开发", "开发工具", "工具链"),
-    "空间与载体": ("空间", "场地", "工位", "孵化器", "社区", "产业园", "入驻", "免租"),
-    "资金与融资": ("补贴", "资助", "融资", "贷款", "基金", "奖励", "成本"),
-    "人才与团队": ("人才", "团队", "招聘", "社保", "公寓", "住房"),
-    "场景与市场": ("场景", "订单", "市场", "应用", "采购", "供需", "客户"),
-    "内容运营": ("内容", "运营", "选题", "热点", "社媒", "传播", "文案", "发布"),
+INDUSTRY_TERMS = {
+    "AI / 大模型": ("ai", "人工智能", "大模型", "智能体", "算法", "算力", "token", "模型开发"),
+    "跨境 / 出海": ("跨境", "出海", "国际", "数字游民", "电商", "贸易", "海外"),
+    "内容 / 文创": ("内容", "文创", "游戏", "短视频", "设计", "数字文创", "创作"),
+    "硬科技 / 智能制造": ("硬科技", "智能制造", "机器人", "芯片", "集成电路", "新能源", "生物医药"),
+    "软件 / 数字经济": ("软件", "数字经济", "互联网", "云服务", "数字化", "信息技术"),
+    "其他创新项目": ("创业", "创新", "孵化", "科技", "opc"),
 }
 
-RISK_RULES = (
-    ("guaranteed_claim", re.compile(r"保证|必得|必拿|100%|百分之百|稳赚|零风险", re.I), "包含保证性或绝对化表述"),
-    ("approval_claim", re.compile(r"已获批|已经通过审核|官方背书|政府指定|独家认证|官方推荐", re.I), "可能暗示未经证明的审批或官方背书"),
-    ("qualification_claim", re.compile(r"符合(?:申报|申请|补贴)?条件|满足(?:申报|申请)?资格|有资格|可(?:直接)?(?:申领|领取)", re.I), "把政策关联写成了确定资格或领取结论"),
-    ("financial_claim", re.compile(r"补贴到账|最高可得|(?:领取|奖励|补贴|资助)[^，。；\n]{0,12}\d+(?:\.\d+)?\s*(?:万|亿|元)", re.I), "包含未经证据支持的金额或到账断言"),
+SERVICE_TERMS = {
+    "低成本工位": ("免费办公", "工位", "免租", "减半", "拎包", "办公空间", "场地"),
+    "算力 / Token": ("算力", "token", "智算", "云服务", "模型开发", "数据补贴"),
+    "注册政务": ("注册", "办照", "执照", "政务", "税务", "开业礼包", "专窗"),
+    "融资路演": ("融资", "基金", "贷款", "信贷", "路演", "bp评审", "投融资"),
+    "客户场景": ("场景", "订单", "客户", "采购", "市场", "供需", "应用示范"),
+    "人才社群": ("人才", "社群", "导师", "招聘", "公寓", "社区", "交流"),
+    "跨境服务": ("跨境", "出海", "国际", "海外", "数字游民", "贸易"),
+}
+
+STAGE_TERMS = {
+    "只有想法": ("注册", "办照", "导师", "社群", "创业", "拎包", "孵化"),
+    "已有 Demo": ("算力", "token", "测试", "场景", "路演", "融资", "加速器", "算法大赛", "bp评审"),
+    "已有客户": ("客户", "订单", "市场", "场景", "融资", "产业链", "扩张", "供需"),
+    "已注册企业": ("企业", "政策", "补贴", "人才", "办公", "融资", "税务", "贷款"),
+}
+
+APPLICATION_ENTRY_PATTERN = re.compile(
+    r"(?:线上入口|在线入口|在线申请|申请入口)\s*[：:]\s*(https?://[^\s，。；；）)]+)", re.I
 )
 
 
@@ -65,8 +70,7 @@ def load_data(data_dir: Path = ROOT / "data") -> Dict[str, Any]:
 
 def clean_text(value: Any, limit: int) -> str:
     text = re.sub(r"[\x00-\x1f\x7f]", " ", str(value or ""))
-    text = re.sub(r"\s+", " ", text).strip()
-    return text[:limit]
+    return re.sub(r"\s+", " ", text).strip()[:limit]
 
 
 def safe_public_url(value: Any) -> str:
@@ -105,368 +109,354 @@ def _unique(values: Iterable[str]) -> List[str]:
     return result
 
 
-def extract_keywords(topic: Mapping[str, Any], limit: int = 10) -> List[str]:
-    source = _normalize("{} {}".format(topic.get("title", ""), topic.get("text", "")))
-    weighted: List[tuple[int, str]] = []
-    for label, terms in CONCEPTS.items():
-        matches = [term for term in terms if term in source]
-        if matches:
-            weighted.extend((4 + source.count(term), term) for term in matches)
-            weighted.append((3 + len(matches), label))
-    places = re.findall(r"([\u4e00-\u9fff]{2,8}(?:市|区|省|园区|社区))", source)
-    weighted.extend((3, place) for place in places)
-    weighted.sort(key=lambda item: (-item[0], -len(item[1]), item[1]))
-    return _unique(item[1] for item in weighted)[:limit]
-
-
-def _policy_corpus(policy: Mapping[str, Any]) -> str:
-    benefits = policy.get("benefits") or []
-    requirements = policy.get("requirements") or {}
-    fields: List[Any] = [
-        policy.get("name"), policy.get("city"), policy.get("province"), policy.get("district"),
-        policy.get("issuer"), policy.get("summary"), policy.get("category"), policy.get("actual_cases"),
+def _community_corpus(community: Mapping[str, Any]) -> str:
+    fields = [
+        community.get("name"), community.get("city"), community.get("province"),
+        community.get("district"), community.get("address"), community.get("operator"),
+        community.get("track"), *(community.get("features") or []),
     ]
-    fields.extend(policy.get("tags") or [])
-    fields.extend(requirements.get("industries") or [])
-    for item in benefits:
-        fields.extend((item.get("item"), item.get("amount"), item.get("type")))
-    return _normalize(" ".join(str(field or "") for field in fields))
+    return _normalize(" ".join(str(value or "") for value in fields))
 
 
-def _official_url(policy: Mapping[str, Any]) -> str:
-    links = policy.get("links") or {}
-    return safe_public_url(links.get("official") or policy.get("officialUrl"))
+def _matched_terms(corpus: str, terms: Sequence[str]) -> List[str]:
+    return _unique(term for term in terms if _normalize(term) in corpus)
 
 
-def _is_official(url: str) -> bool:
-    if not url:
-        return False
-    host = (urlparse(url).hostname or "").lower()
-    return host.endswith(".gov.cn") or host.endswith(".cnbayarea.org.cn") or host.endswith(".ccpit.org")
+def _explicit_application_url(community: Mapping[str, Any]) -> str:
+    for feature in community.get("features") or []:
+        match = APPLICATION_ENTRY_PATTERN.search(str(feature))
+        if match:
+            return safe_public_url(match.group(1))
+    return ""
 
 
-def _freshness_score(policy: Mapping[str, Any], as_of: str) -> int:
-    raw = policy.get("updated_at") or policy.get("publish_date")
-    try:
-        updated = datetime.strptime(str(raw)[:10], "%Y-%m-%d").date()
-        reference = datetime.strptime(as_of[:10], "%Y-%m-%d").date()
-    except (TypeError, ValueError):
-        return 20
-    age = max(0, (reference - updated).days)
-    if age <= 30:
-        return 100
-    if age <= 90:
-        return 88
-    if age <= 180:
-        return 74
-    if age <= 365:
-        return 58
-    if age <= 730:
-        return 38
-    return 12
-
-
-def match_policies(topic: Mapping[str, Any], policies: Sequence[Mapping[str, Any]], limit: int = 10) -> List[Dict[str, Any]]:
-    keywords = extract_keywords(topic)
-    source_text = _normalize("{} {}".format(topic.get("title", ""), topic.get("text", "")))
-    as_of = str(topic.get("observed_at") or date.today().isoformat())
-    results = []
-    for policy in policies:
-        if policy.get("status") == "draft":
+def _policy_evidence(
+    community: Mapping[str, Any], policies_by_id: Mapping[str, Mapping[str, Any]]
+) -> List[Dict[str, str]]:
+    evidence = []
+    for policy_id in community.get("policy_ids") or []:
+        policy = policies_by_id.get(str(policy_id))
+        if not policy:
             continue
-        corpus = _policy_corpus(policy)
-        matched = [term for term in keywords if _normalize(term) in corpus]
-        places = [str(policy.get(field) or "") for field in ("city", "province", "district")]
-        place_matches = [place for place in places if place and _normalize(place) in source_text]
-        matched = _unique(place_matches + matched)
-        if not matched:
-            continue
-        url = _official_url(policy)
-        source_score = 96 if _is_official(url) and policy.get("verified") else 86 if _is_official(url) else 55 if url else 25
-        relevance = min(100, len(matched) * 14 + sum(8 for term in matched if _normalize(term) in _normalize(policy.get("name"))))
-        freshness = _freshness_score(policy, as_of)
-        confidence = round(relevance * 0.66 + source_score * 0.24 + freshness * 0.10)
-        results.append({
-            "id": policy.get("id", ""),
-            "name": policy.get("name", "未命名政策"),
-            "city": policy.get("city") or "全国",
-            "summary": clean_text(policy.get("summary"), 220),
-            "updated_at": policy.get("updated_at") or policy.get("publish_date") or "未记录",
-            "source_url": url,
-            "source_label": "官方原文" if _is_official(url) else "参考来源" if url else "缺少官方原文",
-            "official": _is_official(url),
-            "matched_terms": matched[:6],
-            "relevance": relevance,
-            "confidence": confidence,
-            "boundary": "仅表示内容相关性；适用对象、有效期、申报资格与当前入口仍需回到官方原文核验。",
+        links = policy.get("links") or {}
+        evidence.append({
+            "name": clean_text(policy.get("name") or policy_id, 120),
+            "url": safe_public_url(links.get("official") or policy.get("officialUrl")),
         })
-    results.sort(key=lambda item: (-item["confidence"], -item["relevance"], str(item["id"])))
-    return results[:limit]
+    return evidence[:3]
 
 
-def _match_communities(keywords: Sequence[str], communities: Sequence[Mapping[str, Any]], cities: Sequence[str], limit: int = 6) -> List[Dict[str, Any]]:
-    results = []
-    for community in communities:
-        corpus = _normalize(" ".join(str(value or "") for value in [
-            community.get("name"), community.get("city"), community.get("district"), community.get("track"),
-            *(community.get("features") or []),
-        ]))
-        matched = [term for term in keywords if _normalize(term) in corpus]
-        if not matched and community.get("city") not in cities:
-            continue
-        score = min(100, len(matched) * 15 + (20 if community.get("city") in cities else 0) + (10 if community.get("verified") else 0))
-        results.append({
-            "name": community.get("name", "未命名载体"),
-            "city": community.get("city", ""),
-            "district": community.get("district", ""),
-            "features": (community.get("features") or [])[:4],
-            "source_url": safe_public_url(community.get("source")),
-            "score": score,
-            "boundary": "载体信息仅作采访和选题线索，地址、权益与入驻状态需向运营方再次确认。",
-        })
-    results.sort(key=lambda item: (-item["score"], item["name"]))
-    return results[:limit]
+def recommend_spaces(
+    profile: Mapping[str, Any],
+    communities: Sequence[Mapping[str, Any]],
+    policies: Sequence[Mapping[str, Any]],
+    limit: int = 6,
+) -> List[Dict[str, Any]]:
+    """Return explainable matches for one founder profile.
 
+    City is a hard filter. Industry, stage, services and the free-text description
+    affect ranking. Scores are a transparent information-retrieval aid, not an
+    eligibility or approval prediction.
+    """
 
-def _build_draft(topic: Mapping[str, Any], matches: Sequence[Mapping[str, Any]], cities: Sequence[str]) -> str:
-    mode_label = "非实时演示场景" if topic.get("mode") == "非实时演示场景" else "手动输入待核验"
-    facts = []
-    for item in matches[:3]:
-        facts.append("- OPC Gate 数据库收录《{}》（{}，数据日期 {}，{}）。".format(
-            item["name"], item["city"], item["updated_at"], item["source_label"]
-        ))
-    if not facts:
-        facts = ["- 当前输入未匹配到足够相关的政策证据，不附会政策结论。"]
-    inference = "、".join(city for city in cities if city != "全国") or "暂无明确城市"
-    verify = ["- 核对《{}》的适用对象、有效期、申报入口与当前版本。".format(item["name"]) for item in matches[:3]]
-    if not verify:
-        verify = ["- 补充公开来源和更具体的运营场景后重新分析。"]
-    source = safe_public_url(topic.get("source_url"))
-    return "\n".join([
-        "【{}】{}".format(mode_label, topic.get("title") or "政策内容选题"),
-        "",
-        "【事实】",
-        *facts,
-        "",
-        "【推断】",
-        "- 按关键词重合、来源完整度和数据日期综合，{}值得优先继续核验；这是内容选题线索，不是落地推荐或获批概率。".format(inference),
-        "",
-        "【待核验】",
-        *verify,
-        "- 原始话题来源：{}".format(source or "未提供，只能作为方法演示"),
-        "",
-        "边界：政策关联不等于资格判断；本工具不自动发布；发布前必须人工核验。",
-    ]).strip()
+    city = clean_text(profile.get("city"), 40)
+    industry = clean_text(profile.get("industry") or "其他创新项目", 60)
+    stage = clean_text(profile.get("stage") or "只有想法", 40)
+    services = _unique(clean_text(item, 40) for item in (profile.get("services") or []))
+    description = clean_text(profile.get("description"), MAX_DESCRIPTION_CHARS)
+    if not city:
+        raise ValueError("请选择目标城市")
+    if limit < 1:
+        return []
 
-
-def scan_draft(text: str, report: Mapping[str, Any]) -> Dict[str, Any]:
-    value = str(text or "").strip()
-    violations = []
-    for code, pattern, message in RISK_RULES:
-        if pattern.search(value):
-            violations.append({"code": code, "message": message})
-    required_layers = ("【事实】", "【推断】", "【待核验】")
-    if not all(layer in value for layer in required_layers):
-        violations.append({"code": "missing_layers", "message": "缺少事实、推断或待核验分层"})
-    if "政策关联不等于资格判断" not in value:
-        violations.append({"code": "missing_qualification_boundary", "message": "缺少资格判断边界"})
-    if not re.search(r"不自动发布|手动发布", value):
-        violations.append({"code": "missing_publish_boundary", "message": "缺少不自动发布说明"})
-    if "人工核验" not in value:
-        violations.append({"code": "missing_human_review", "message": "缺少人工核验要求"})
-    evidence = json.dumps(report.get("matches", []), ensure_ascii=False).replace(" ", "")
-    for claim in _unique(re.findall(r"\d+(?:\.\d+)?\s*(?:%|％|万元|亿元|元|万|亿)", value)):
-        if claim.replace(" ", "") not in evidence:
-            violations.append({"code": "unsupported_numeric_claim", "message": "出现证据中不存在的数字断言：{}".format(claim)})
-    deduped = list({item["code"]: item for item in violations}.values())
-    return {
-        "passed": not deduped,
-        "violations": deduped,
-        "method": "deterministic_boundary_rules",
-        "note": "规则扫描只检查结构、边界和高风险措辞，不等于事实核验。",
-    }
-
-
-def analyze_topic(topic: Mapping[str, Any], data: Mapping[str, Any]) -> Dict[str, Any]:
-    title = clean_text(topic.get("title"), 120)
-    text = clean_text(topic.get("text"), MAX_INPUT_CHARS)
-    if not title or len(text) < 12:
-        raise ValueError("请填写标题，并输入至少 12 个字的公开内容或自拟选题摘要")
-    normalized = {
-        "title": title,
-        "text": text,
-        "source_url": safe_public_url(topic.get("source_url")),
-        "mode": "非实时演示场景" if topic.get("mode") == "非实时演示场景" else "手动输入公开内容",
-        "observed_at": clean_text(topic.get("observed_at") or date.today().isoformat(), 10),
-    }
-    matches = match_policies(normalized, data.get("policies", []))
-    keywords = extract_keywords(normalized)
-    cities = _unique(item["city"] for item in matches)[:6]
-    communities = _match_communities(keywords, data.get("communities", []), cities)
-    draft = _build_draft(normalized, matches, cities)
-    report = {
-        "product_name": PRODUCT_NAME,
-        "topic": normalized,
-        "keywords": keywords,
-        "matches": matches,
-        "cities": cities,
-        "communities": communities,
-        "draft": draft,
-        "data_scope": {
-            "policies": len(data.get("policies", [])),
-            "cities": len(data.get("cities", [])),
-            "communities": len(data.get("communities", [])),
-            "snapshot": data.get("snapshot", "未记录"),
-        },
-        "limitations": [
-            "输入只在当前请求中处理；本工具不抓取账号、私信、Cookie 或未授权个人信息。",
-            "政策和载体排序是内容相关性线索，不是资格判断、获批概率或政府评分。",
-            "本工具不自动发布；来源、时效、金额和适用对象必须由运营人员回到原文人工核验。",
-        ],
-    }
-    report["draft_scan"] = scan_draft(draft, report)
-    return report
-
-
-def _model_prompt(report: Mapping[str, Any]) -> str:
-    evidence = [{
-        "name": item["name"], "city": item["city"], "summary": item["summary"],
-        "source_url": item["source_url"], "updated_at": item["updated_at"], "boundary": item["boundary"],
-    } for item in report.get("matches", [])[:6]]
-    return """你是 OPC Gate 的证据型政策内容编辑。只根据给定 JSON 改写一份中文内容草稿。
-
-硬规则：
-1. 必须依次保留【事实】【推断】【待核验】三层。
-2. 不得补充证据中不存在的金额、资格、期限、排名、用户量、热度或官方背书。
-3. 政策只能写成待核验的内容线索，不能写成符合资格、可以领取或已经获批。
-4. 必须原样保留：政策关联不等于资格判断；本工具不自动发布；发布前必须人工核验。
-5. 不使用 Markdown 围栏，只输出草稿正文，控制在 900 字以内。
-
-输入 JSON：{}""".format(json.dumps({
-        "topic": report.get("topic"), "keywords": report.get("keywords"),
-        "evidence": evidence, "limitations": report.get("limitations"),
-    }, ensure_ascii=False))
-
-
-def rewrite_with_modelscope(report: Mapping[str, Any], timeout: int = 45) -> Dict[str, Any]:
-    token = os.getenv("MODELSCOPE_ACCESS_TOKEN", "").strip()
-    if not token:
-        return {"used": False, "model": None, "draft": report["draft"], "reason": "未配置 ModelScope Access Token，已保留可运行的规则草稿。"}
-    payload = json.dumps({
-        "model": MODEL_ID,
-        "messages": [
-            {"role": "system", "content": "你只能做受给定证据约束的中文政策内容编辑。"},
-            {"role": "user", "content": _model_prompt(report)},
-        ],
-        "temperature": 0.2,
-        "max_tokens": 1400,
-    }, ensure_ascii=False).encode("utf-8")
-    request = urllib.request.Request(MODELSCOPE_BASE_URL, data=payload, method="POST", headers={
-        "Authorization": "Bearer {}".format(token),
-        "Content-Type": "application/json",
-        "User-Agent": "opcgate-policy-content-ops/1.0",
-    })
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            body = json.loads(response.read().decode("utf-8"))
-        text = clean_text(body["choices"][0]["message"]["content"], 1600)
-        scan = scan_draft(text, report)
-        if not scan["passed"]:
-            return {"used": False, "model": MODEL_ID, "draft": report["draft"], "reason": "模型草稿未通过确定性边界扫描，已自动降级。", "scan": scan}
-        return {"used": True, "model": MODEL_ID, "draft": text, "reason": "ModelScope API-Inference 改写已通过确定性边界扫描。", "scan": scan}
-    except (KeyError, IndexError, json.JSONDecodeError, urllib.error.URLError, TimeoutError) as error:
-        return {"used": False, "model": MODEL_ID, "draft": report["draft"], "reason": "模型暂不可用，已自动降级为规则草稿：{}".format(clean_text(error, 120))}
-
-
-def report_markdown(report: Mapping[str, Any]) -> str:
-    scope = report["data_scope"]
-    cities = "、".join(report["cities"]) or "暂无"
-    keywords = "、".join(report["keywords"]) or "暂无"
-    return """### 本次分析
-
-| 数据底座 | 数量 |
-|---|---:|
-| 政策记录 | {policies} |
-| 城市 / 适用范围 | {cities_count} |
-| 社区 / 载体样本 | {communities} |
-| 数据快照 | {snapshot} |
-
-**识别关键词：** {keywords}  
-**优先核验城市：** {cities}  
-**命中政策线索：** {matches} 条
-
-> 排序只代表内容相关性，不代表申报资格、获批概率或政府推荐。
-""".format(
-        policies=scope["policies"], cities_count=scope["cities"], communities=scope["communities"],
-        snapshot=html.escape(str(scope["snapshot"])), keywords=html.escape(keywords), cities=html.escape(cities), matches=len(report["matches"]),
+    policies_by_id = {str(item.get("id")): item for item in policies if item.get("id")}
+    industry_terms = INDUSTRY_TERMS.get(industry, INDUSTRY_TERMS["其他创新项目"])
+    stage_terms = STAGE_TERMS.get(stage, STAGE_TERMS["只有想法"])
+    description_terms = _unique(
+        term
+        for terms in (*INDUSTRY_TERMS.values(), *SERVICE_TERMS.values())
+        for term in terms
+        if _normalize(term) in _normalize(description)
     )
 
+    results: List[Dict[str, Any]] = []
+    for community in communities:
+        if clean_text(community.get("city"), 40) != city:
+            continue
+        corpus = _community_corpus(community)
+        track = _normalize(community.get("track"))
+        industry_matches = _matched_terms(corpus, industry_terms)
+        track_matches = _matched_terms(track, industry_terms)
+        stage_matches = _matched_terms(corpus, stage_terms)
 
-def evidence_rows(report: Mapping[str, Any]) -> List[List[Any]]:
+        service_matches: Dict[str, List[str]] = {}
+        for service in services:
+            matched = _matched_terms(corpus, SERVICE_TERMS.get(service, (service,)))
+            if matched:
+                service_matches[service] = matched
+
+        description_matches = _matched_terms(corpus, description_terms)
+        score = 18
+        score += min(34, len(industry_matches) * 6 + len(track_matches) * 8)
+        score += min(30, sum(12 + min(4, len(terms) * 2) for terms in service_matches.values()))
+        score += min(12, len(stage_matches) * 3)
+        score += min(6, len(description_matches) * 2)
+
+        source_url = safe_public_url(community.get("source_url") or community.get("source"))
+        application_url = _explicit_application_url(community)
+        linked_policies = _policy_evidence(community, policies_by_id)
+        verified = bool(community.get("verified"))
+        if verified and source_url:
+            evidence_status = "已核验介绍来源"
+            score += 5
+        elif source_url:
+            evidence_status = "有公开来源，待复核"
+            score += 3
+        elif linked_policies:
+            evidence_status = "仅政策关联，载体待核验"
+        else:
+            evidence_status = "信息待核验"
+
+        if application_url:
+            application_status = "公开线上入口"
+        elif source_url:
+            application_status = "准备申请 / 联系运营方"
+        else:
+            application_status = "联系运营方 / 核验入口"
+
+        reasons = ["目标城市为{}".format(city)]
+        if industry_matches:
+            reasons.append("{}方向匹配：{}".format(industry, "、".join(industry_matches[:3])))
+        for service, matched in service_matches.items():
+            reasons.append("需要{}：载体信息提到{}".format(service, "、".join(matched[:2])))
+        if stage_matches:
+            reasons.append("适合“{}”阶段继续了解：{}".format(stage, "、".join(stage_matches[:2])))
+        if description_matches and len(reasons) < 5:
+            reasons.append("项目描述关联：{}".format("、".join(description_matches[:2])))
+        if len(reasons) == 1:
+            reasons.append("同城候选；行业和服务信息仍需向运营方核验")
+
+        results.append({
+            "id": str(community.get("id") or community.get("name") or len(results)),
+            "name": clean_text(community.get("name") or "未命名空间", 120),
+            "city": city,
+            "district": clean_text(community.get("district") or "区域待核验", 40),
+            "address": clean_text(community.get("address") or "地址待核验", 160),
+            "operator": clean_text(community.get("operator") or "运营方待核验", 160),
+            "track": clean_text(community.get("track") or "方向待核验", 120),
+            "features": [clean_text(item, 180) for item in (community.get("features") or [])[:6]],
+            "score": min(99, score),
+            "match_reasons": reasons[:6],
+            "matched_services": list(service_matches),
+            "evidence_status": evidence_status,
+            "source_url": source_url,
+            "policy_evidence": linked_policies,
+            "application_status": application_status,
+            "application_url": application_url,
+            "boundary": "本推荐用于信息筛选，不代表入驻资格；权益与入口需向运营方核验。",
+        })
+
+    results.sort(
+        key=lambda item: (
+            -item["score"],
+            0 if item["evidence_status"] == "已核验介绍来源" else 1,
+            item["name"],
+        )
+    )
+    return results[:limit]
+
+
+def compare_spaces(selected_ids: Sequence[str], results: Sequence[Mapping[str, Any]]) -> List[Dict[str, str]]:
+    selected = _unique(str(item) for item in (selected_ids or []))
+    if not 2 <= len(selected) <= 3:
+        raise ValueError("请选择 2–3 个空间进行比较")
+    by_id = {str(item.get("id")): item for item in results}
+    if any(item_id not in by_id for item_id in selected):
+        raise ValueError("比较项已失效，请重新搜索")
+
     rows = []
-    for item in report.get("matches", []):
-        rows.append([
-            item["name"], item["city"], "、".join(item["matched_terms"]), item["confidence"],
-            item["source_label"], item["updated_at"], item["source_url"], item["boundary"],
-        ])
+    for item_id in selected:
+        item = by_id[item_id]
+        next_step = str(item.get("application_status") or "联系运营方")
+        if item.get("application_url"):
+            next_step += "：{}".format(item["application_url"])
+        rows.append({
+            "空间": str(item.get("name") or ""),
+            "区域 / 地址": "{} · {}".format(item.get("district") or "", item.get("address") or ""),
+            "运营方": str(item.get("operator") or ""),
+            "主方向": str(item.get("track") or ""),
+            "推荐依据": "；".join(item.get("match_reasons") or []),
+            "服务特征": "；".join((item.get("features") or [])[:4]) or "待核验",
+            "证据状态": str(item.get("evidence_status") or ""),
+            "下一步": next_step,
+        })
     return rows
 
 
-def checklist_markdown(report: Mapping[str, Any]) -> str:
-    policy_lines = []
-    for item in report.get("matches", [])[:4]:
-        link = "[打开来源]({})".format(item["source_url"]) if item["source_url"] else "缺少官方原文"
-        policy_lines.append("- [ ] 核对《{}》的适用对象、有效期和入口：{}".format(html.escape(item["name"]), link))
-    return "\n".join([
-        "### 发布前人工核验清单",
-        "- [ ] 核对原始话题的正文、时间和上下文",
-        *policy_lines,
-        "- [ ] 确认事实、推断、待核验三层没有混写",
-        "- [ ] 删除资格、获批、到账、官方背书和保证性表述",
-        "- [ ] 由发布者完成最终复核并手动发布",
-        "\n**门禁默认关闭。上面的 Markdown 勾选框只用于提示，不代表系统替你核验。**",
-    ])
-
-
-def gate_status(selected: Sequence[str]) -> str:
-    required = {"来源与时效", "政策适用边界", "事实/推断分层", "高风险措辞", "最终人工复核"}
-    complete = required.issubset(set(selected or []))
-    if complete:
-        return "✅ 发布门禁已打开：你已声明完成全部人工核验。请仍以官方原文为准并手动发布。"
-    return "🔒 发布门禁关闭：还需完成 {} 项人工核验。".format(len(required - set(selected or [])))
-
-
-def ui_analyze(title: str, text: str, source_url: str, mode: str, observed_at: str, use_ai: bool):
-    data = load_data()
-    report = analyze_topic({
-        "title": title, "text": text, "source_url": source_url, "mode": mode,
-        "observed_at": observed_at or date.today().isoformat(),
-    }, data)
-    model_result = rewrite_with_modelscope(report) if use_ai else {
-        "used": False, "model": None, "draft": report["draft"], "reason": "本次使用可解释规则草稿；未请求模型改写。"
+def build_application_checklist(stage: str) -> str:
+    stage = clean_text(stage or "只有想法", 40)
+    common = [
+        "身份证明及常用联系方式",
+        "一页项目说明：解决什么问题、服务谁、当前进展",
+        "团队成员与分工说明",
+        "希望获得的空间与服务清单",
+        "拟申请载体公开信息截图或来源链接",
+    ]
+    stage_items = {
+        "只有想法": ["初步用户访谈或需求证据", "未来 30 天验证计划"],
+        "已有 Demo": ["Demo 链接、截图或演示视频", "产品路线图与算力 / 场景需求", "融资或路演版 BP（如需要）"],
+        "已有客户": ["客户案例或脱敏合作证明", "收入 / 订单概况（可脱敏）", "扩张计划与场景需求"],
+        "已注册企业": ["营业执照及企业基本信息", "财务或纳税情况（按运营方要求）", "知识产权、合同或融资材料（如适用）"],
     }
-    model_label = "✅ {}".format(model_result["reason"]) if model_result["used"] else "ℹ️ {}".format(model_result["reason"])
-    return (
-        report_markdown(report), evidence_rows(report), model_result["draft"],
-        checklist_markdown(report), model_label, report,
-        [], gate_status([]),
+    items = common + stage_items.get(stage, stage_items["只有想法"])
+    return "\n".join(["### {}阶段 · 申请准备清单".format(stage), *["- [ ] {}".format(item) for item in items]])
+
+
+def _result_cards(results: Sequence[Mapping[str, Any]]) -> str:
+    if not results:
+        return """<section class="empty-passport"><b>没有找到同城载体</b><span>可换一个城市，或稍后补充该城市的 OPC 空间资料。</span></section>"""
+    cards = []
+    for index, item in enumerate(results, start=1):
+        reasons = "".join("<li>{}</li>".format(html.escape(reason)) for reason in item["match_reasons"][:4])
+        features = "".join("<span class=\"feature-tag\">{}</span>".format(html.escape(value)) for value in item["features"][:4])
+        source = (
+            '<a href="{}" target="_blank" rel="noopener">查看载体来源 ↗</a>'.format(html.escape(item["source_url"], quote=True))
+            if item["source_url"] else "<span>暂无载体公开来源</span>"
+        )
+        if item["application_url"]:
+            action = '<a class="passport-action" href="{}" target="_blank" rel="noopener">打开公开入口 ↗</a>'.format(
+                html.escape(item["application_url"], quote=True)
+            )
+        else:
+            action = '<span class="passport-action is-muted">{}</span>'.format(html.escape(item["application_status"]))
+        cards.append("""
+        <article class="space-passport">
+          <header class="passport-head">
+            <span class="passport-rank">#{rank:02d}</span>
+            <div><h3>{name}</h3><p>{district} · {track}</p></div>
+            <strong class="match-score">{score}<small>/99</small></strong>
+          </header>
+          <div class="passport-grid">
+            <section><h4>为什么适合</h4><ul>{reasons}</ul></section>
+            <section><h4>地址与运营</h4><p>{address}</p><p class="muted">{operator}</p></section>
+          </div>
+          <div class="feature-strip">{features}</div>
+          <footer class="passport-foot">
+            <span class="evidence-dot evidence-{verified}"></span><b>{evidence}</b>{source}{action}
+          </footer>
+        </article>
+        """.format(
+            rank=index,
+            name=html.escape(item["name"]), district=html.escape(item["district"]),
+            track=html.escape(item["track"]), score=item["score"], reasons=reasons,
+            address=html.escape(item["address"]), operator=html.escape(item["operator"]),
+            features=features or '<span class="feature-tag">服务信息待核验</span>',
+            verified="ok" if item["evidence_status"] == "已核验介绍来源" else "pending",
+            evidence=html.escape(item["evidence_status"]), source=source, action=action,
+        ))
+    return '<div class="passport-stack">{}</div>'.format("".join(cards))
+
+
+def _search_summary(profile: Mapping[str, Any], results: Sequence[Mapping[str, Any]], scope: Mapping[str, Any]) -> str:
+    if not results:
+        return "### 暂无同城结果\n当前数据中没有找到 **{}** 的 OPC 载体。".format(html.escape(profile["city"]))
+    services = "、".join(profile.get("services") or []) or "未限定服务"
+    return """### 找到 {count} 个同城候选
+**{city} · {industry} · {stage}**
+需求：{services}
+
+排序综合行业、阶段、服务需求与证据完整度；分数只用于本次候选排序。数据快照：{snapshot}。
+""".format(
+        count=len(results), city=html.escape(profile["city"]), industry=html.escape(profile["industry"]),
+        stage=html.escape(profile["stage"]), services=html.escape(services), snapshot=html.escape(str(scope.get("snapshot") or "未记录")),
     )
 
 
+def ui_recommend(city: str, industry: str, stage: str, services: Sequence[str], description: str):
+    data = load_data()
+    profile = {
+        "city": city,
+        "industry": industry,
+        "stage": stage,
+        "services": list(services or []),
+        "description": description,
+    }
+    results = recommend_spaces(profile, data["communities"], data["policies"], limit=6)
+    choices = [(item["name"], item["id"]) for item in results]
+    try:
+        import gradio as gr
+        selector = gr.CheckboxGroup(choices=choices, value=[])
+    except ImportError:
+        selector = {"choices": choices, "value": []}
+    state = {"profile": profile, "results": results}
+    return (
+        _search_summary(profile, results, data),
+        _result_cards(results),
+        selector,
+        state,
+        build_application_checklist(stage),
+        "选择 2–3 个候选后生成横向比较。",
+    )
+
+
+def ui_compare(selected_ids: Sequence[str], state: Mapping[str, Any]) -> str:
+    try:
+        rows = compare_spaces(selected_ids, (state or {}).get("results") or [])
+    except ValueError as error:
+        return "⚠️ {}".format(error)
+    headers = list(rows[0])
+    table = ["| {} |".format(" | ".join(headers)), "|{}|".format("|".join(["---"] * len(headers)))]
+    for row in rows:
+        table.append("| {} |".format(" | ".join(str(row[key]).replace("|", "／") for key in headers)))
+    return "\n".join(["### 候选空间横向比较", *table, "", "> 比较结果用于准备咨询，不代表任何空间接受入驻申请。"])
+
+
 CSS = """
-.gradio-container {width:100% !important; max-width:1240px !important; min-width:0 !important; margin:0 auto !important; overflow-x:hidden !important;}
-.gradio-container > .main, .gradio-container .contain, .gradio-container .tabs {width:100% !important; min-width:0 !important; max-width:100% !important;}
-.gradio-container .table-wrap {min-width:0 !important; max-width:100% !important; overflow-x:auto !important;}
-.hero {padding: 32px; border-radius: 24px; background: linear-gradient(135deg,#0f172a,#1e3a8a 68%,#0f766e); color:#fff; box-shadow:0 24px 70px rgba(15,23,42,.16)}
-.hero h1 {font-size:42px; line-height:1.12; margin:10px 0 14px}
-.hero p {font-size:17px; color:#dbeafe; max-width:850px}
-.pill {display:inline-block;padding:6px 12px;border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:13px;letter-spacing:.04em}
-.metric-row {display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
-.metric {padding:14px;border-radius:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14)}
-.metric b {display:block;font-size:23px}.metric span{color:#bfdbfe;font-size:12px}
-.section-card {border:1px solid #e2e8f0 !important;border-radius:20px !important;padding:18px !important;background:#fff !important;box-shadow:0 10px 32px rgba(15,23,42,.05)}
-.boundary {border-left:4px solid #f59e0b;padding:14px 16px;background:#fffbeb;border-radius:10px;color:#78350f}
-@media(max-width:720px){.hero{padding:22px}.hero h1{font-size:31px}.metric-row{grid-template-columns:repeat(2,1fr)}}
+:root {
+  --blueprint: #173b4d; --blueprint-deep: #102c3a; --blueprint-soft: #dce8eb;
+  --paper: #f4f1e8; --paper-raised: #fffdf7; --ink: #17252d; --ink-soft: #607078;
+  --jade: #16735d; --jade-soft: #dcece6; --clay: #a65035; --line: rgba(23,59,77,.14);
+  --shadow-card: 0 0 0 1px rgba(23,59,77,.07), 0 8px 26px rgba(23,59,77,.07);
+}
+.gradio-container {width:100% !important;max-width:1260px !important;min-width:0 !important;margin:0 auto !important;overflow-x:hidden !important;background:var(--paper) !important;color:var(--ink) !important;font-family:"Source Han Sans SC","PingFang SC",sans-serif !important;-webkit-font-smoothing:antialiased;}
+.gradio-container > .main,.gradio-container .contain,.gradio-container .tabs{width:100% !important;min-width:0 !important;max-width:100% !important;}
+.gradio-container .table-wrap{min-width:0 !important;max-width:100% !important;overflow-x:auto !important;}
+.app-shell{padding:20px 4px 4px;}
+.app-bar{display:flex;align-items:center;justify-content:space-between;padding:0 4px 18px;border-bottom:1px solid var(--line);}
+.wordmark{font-family:"Songti SC","STSong",serif;font-size:20px;font-weight:700;letter-spacing:.04em;color:var(--blueprint-deep);}
+.wordmark small{font-family:"Source Han Sans SC","PingFang SC",sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--jade);margin-left:10px;}
+.scope-note{font-size:12px;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+.hero-copy{padding:48px 4px 34px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.6fr);gap:48px;align-items:end;}
+.hero-copy h1{font-family:"Songti SC","STSong",serif;font-size:48px;line-height:1.08;letter-spacing:-.035em;margin:0 0 18px;color:var(--blueprint-deep);text-wrap:balance;}
+.hero-copy p{font-size:16px;line-height:1.75;color:var(--ink-soft);max-width:720px;margin:0;text-wrap:pretty;}
+.hero-route{border-left:3px solid var(--jade);padding:8px 0 8px 18px;display:grid;gap:8px;color:var(--blueprint);font-size:13px;font-weight:600;}
+.hero-route span{color:var(--ink-soft);font-weight:400;margin-left:6px;}
+.workspace-row{gap:20px !important;align-items:flex-start !important;}
+.advisor-panel,.results-panel{background:var(--paper-raised) !important;border:0 !important;border-radius:16px !important;box-shadow:var(--shadow-card) !important;padding:22px !important;}
+.advisor-panel{position:sticky;top:12px;}
+.section-kicker{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--jade);text-transform:uppercase;margin-bottom:5px;}
+.section-title{font-family:"Songti SC","STSong",serif;font-size:24px;font-weight:700;color:var(--blueprint-deep);margin:0 0 4px;}
+.section-help{font-size:13px;color:var(--ink-soft);margin:0 0 16px;}
+.primary-action{min-height:48px !important;background:var(--jade) !important;border-color:var(--jade) !important;color:white !important;font-weight:700 !important;border-radius:9px !important;transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 140ms cubic-bezier(.23,1,.32,1) !important;}
+.primary-action:hover{background:#105f4c !important}.primary-action:active{transform:scale(.98)}
+.passport-stack{display:grid;gap:14px;margin-top:14px;}
+.space-passport{background:var(--paper-raised);border-radius:14px;box-shadow:var(--shadow-card);overflow:hidden;}
+.passport-head{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:12px;align-items:center;padding:18px 18px 14px;border-bottom:1px solid var(--line);}
+.passport-rank{font-size:12px;font-weight:700;color:var(--jade);font-variant-numeric:tabular-nums;}
+.passport-head h3{font-family:"Songti SC","STSong",serif;font-size:21px;line-height:1.25;margin:0 0 3px;color:var(--blueprint-deep);}
+.passport-head p{font-size:12px;color:var(--ink-soft);margin:0;}
+.match-score{font-size:25px;color:var(--jade);font-variant-numeric:tabular-nums;}.match-score small{font-size:10px;color:var(--ink-soft);margin-left:2px;}
+.passport-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;padding:16px 18px 12px;}
+.passport-grid h4{font-size:11px;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;text-transform:uppercase;}
+.passport-grid ul{padding-left:18px;margin:0;}.passport-grid li,.passport-grid p{font-size:13px;line-height:1.55;margin:0 0 5px;color:var(--ink);}.passport-grid .muted{color:var(--ink-soft);}
+.feature-strip{display:flex;gap:6px;flex-wrap:wrap;padding:0 18px 14px;}.feature-tag{display:inline-flex;padding:5px 8px;border-radius:6px;background:var(--blueprint-soft);font-size:11px;color:var(--blueprint);}
+.passport-foot{display:flex;align-items:center;gap:9px;min-height:46px;padding:10px 18px;background:rgba(23,59,77,.035);font-size:11px;color:var(--ink-soft);flex-wrap:wrap;}
+.passport-foot b{color:var(--ink);}.passport-foot a{color:var(--jade);text-decoration:none;font-weight:700;}.evidence-dot{width:8px;height:8px;border-radius:50%;}.evidence-ok{background:var(--jade)}.evidence-pending{background:var(--clay)}
+.passport-action{margin-left:auto;padding:7px 10px;border-radius:7px;background:var(--jade-soft);color:var(--jade) !important;font-weight:700;}.passport-action.is-muted{background:transparent;color:var(--ink-soft) !important;}
+.empty-passport{display:grid;gap:5px;padding:30px 20px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--ink-soft);}.empty-passport b{color:var(--blueprint);}
+.boundary-note{margin-top:18px;padding:14px 16px;border-left:3px solid var(--clay);background:#f5e8e1;color:#713d2b;border-radius:8px;font-size:12px;line-height:1.6;}
+@media(max-width:800px){.hero-copy{grid-template-columns:1fr;gap:22px;padding:34px 4px 24px}.hero-copy h1{font-size:36px}.scope-note{display:none}.advisor-panel{position:static}.passport-grid{grid-template-columns:1fr;gap:12px}.passport-foot{align-items:flex-start}.passport-action{margin-left:0;width:100%}.workspace-row{display:block !important}.advisor-panel,.results-panel{margin-bottom:16px;padding:16px !important}}
+@media(prefers-reduced-motion:reduce){.primary-action{transition:none !important}}
 """
 
 
@@ -476,82 +466,66 @@ def build_demo():
     except ImportError as error:
         raise RuntimeError("请先安装 requirements.txt 中的 Gradio") from error
 
-    today = date.today().isoformat()
+    data = load_data()
+    city_choices = sorted({str(item.get("city")) for item in data["communities"] if item.get("city") and item.get("city") != "全国"})
+    default_services = ["低成本工位", "算力 / Token", "融资路演"]
+
     with gr.Blocks(title=PRODUCT_NAME) as demo:
         gr.HTML("""
-        <section class="hero">
-          <span class="pill">AI + 运营 · 可解释政策内容工作台</span>
-          <h1>把公开话题，变成<br>有来源、有边界的政策内容</h1>
-          <p>面向园区、创业服务机构和政策内容运营：一次完成话题理解、政策证据关联、分层草稿与发布前核验。不是热搜搬运，也不替用户作资格判断。</p>
-          <div class="metric-row">
-            <div class="metric"><b>125</b><span>条政策记录</span></div>
-            <div class="metric"><b>42</b><span>城市 / 适用范围</span></div>
-            <div class="metric"><b>128</b><span>社区 / 载体样本</span></div>
-            <div class="metric"><b>3 层</b><span>事实 / 推断 / 待核验</span></div>
-          </div>
-        </section>
+        <main class="app-shell">
+          <header class="app-bar"><div class="wordmark">OPC Gate <small>SPACE MATCH</small></div><div class="scope-note">128 个载体 · 38 个城市 · 数据快照 2026-05-22</div></header>
+          <section class="hero-copy">
+            <div><h1>找到适合你的 OPC 空间，<br>再准备申请。</h1><p>告诉我们你在哪里、做什么、项目走到哪一步。OPC Gate 会解释每个候选为什么适合、证据是否完整，以及下一步能不能直接进入公开入口。</p></div>
+            <div class="hero-route"><div>01 <span>描述创业项目</span></div><div>02 <span>比较匹配空间</span></div><div>03 <span>准备申请材料</span></div></div>
+          </section>
+        </main>
         """)
-        gr.Markdown("""
-        <div class="boundary"><b>产品边界</b>：只处理用户手动输入的公开内容或明确标注的演示场景；不抓取账号数据，不自动发布。政策关联不等于资格判断，最终结论以官方原文和主管部门答复为准。</div>
-        """)
-        with gr.Row():
-            with gr.Column(scale=5, elem_classes=["section-card"]):
-                gr.Markdown("## 1. 输入一个真实运营选题")
-                mode = gr.Radio(["手动输入公开内容", "非实时演示场景"], value="手动输入公开内容", label="输入类型")
-                title = gr.Textbox(label="话题标题", placeholder="例如：AI 智能体创业者如何寻找落地政策", max_lines=2)
-                text = gr.Textbox(label="公开内容 / 自拟选题摘要", placeholder="粘贴公开可见正文，或描述你准备制作的政策内容。请勿输入私信、Cookie、账号凭证或未授权个人信息。", lines=8, max_lines=12)
-                with gr.Row():
-                    source = gr.Textbox(label="原始来源链接（推荐）", placeholder="https://...")
-                    observed = gr.Textbox(label="记录日期", value=today)
-                use_ai = gr.Checkbox(label="使用 ModelScope API-Inference 在证据范围内改写（不可用时自动降级）", value=True)
-                run = gr.Button("开始生成证据型内容", variant="primary")
-                gr.Examples([
-                    ["AI 智能体创业者如何寻找落地政策", "园区内容运营准备解读 AI 智能体、一人公司、算力、创业空间与政策支持之间的关系。", "", "非实时演示场景", today, False],
-                    ["为什么一人公司开始关注算力和办公空间", "面向独立开发者制作一篇城市落地内容，需要寻找可追溯的算力、空间、融资与人才政策线索。", "", "非实时演示场景", today, False],
-                ], inputs=[title, text, source, mode, observed, use_ai])
-            with gr.Column(scale=4, elem_classes=["section-card"]):
-                gr.Markdown("## 2. 看懂话题与数据范围")
-                summary = gr.Markdown("输入内容后，这里会展示关键词、城市分布和数据口径。")
-                model_status = gr.Markdown("ℹ️ 规则分析无需模型 Token 即可运行。")
-        with gr.Tabs():
-            with gr.Tab("政策证据"):
-                evidence = gr.Dataframe(
-                    headers=["政策", "城市", "命中词", "置信度", "来源", "数据日期", "原文链接", "适用边界"],
-                    datatype=["str", "str", "str", "number", "str", "str", "str", "str"],
-                    interactive=False, wrap=True, label="相关性排序（不是资格或获批概率）",
+        with gr.Row(elem_classes=["workspace-row"]):
+            with gr.Column(scale=4, min_width=310, elem_classes=["advisor-panel"]):
+                gr.HTML('<div class="section-kicker">Step 01 · Founder brief</div><h2 class="section-title">你的落地需求</h2><p class="section-help">四项信息决定推荐排序，结果不作入驻资格判断。</p>')
+                city = gr.Dropdown(city_choices, value="广州", label="目标城市")
+                industry = gr.Dropdown(list(INDUSTRY_TERMS), value="AI / 大模型", label="项目行业")
+                stage = gr.Radio(list(STAGE_TERMS), value="已有 Demo", label="当前阶段")
+                services = gr.CheckboxGroup(list(SERVICE_TERMS), value=default_services, label="最需要的服务")
+                description = gr.Textbox(
+                    label="补充一句项目描述（可选）",
+                    value="正在做企业智能体产品，需要试用客户和算力。",
+                    lines=3,
+                    max_lines=5,
+                    max_length=MAX_DESCRIPTION_CHARS,
                 )
-            with gr.Tab("分层草稿"):
-                draft = gr.Textbox(label="事实 / 推断 / 待核验草稿", lines=22, interactive=True)
-                gr.Markdown("编辑草稿后仍需人工复核。模型输出只有通过确定性边界扫描才会被采用。")
-            with gr.Tab("发布门禁"):
-                checklist = gr.Markdown("完成分析后生成核验清单。")
-                checks = gr.CheckboxGroup(
-                    ["来源与时效", "政策适用边界", "事实/推断分层", "高风险措辞", "最终人工复核"],
-                    label="我已逐项完成人工核验",
+                run = gr.Button("开始匹配空间", variant="primary", elem_classes=["primary-action"])
+                gr.Examples(
+                    [["广州", "AI / 大模型", "已有 Demo", default_services, "正在做企业智能体产品，需要试用客户和算力。"],
+                     ["广州", "跨境 / 出海", "已注册企业", ["注册政务", "跨境服务"], "跨境 AI 内容工具，准备在广州设立经营主体。"]],
+                    inputs=[city, industry, stage, services, description],
                 )
-                check_gate = gr.Button("检查发布门禁")
-                gate = gr.Markdown(gate_status([]))
-                check_gate.click(gate_status, inputs=checks, outputs=gate)
+            with gr.Column(scale=7, min_width=420, elem_classes=["results-panel"]):
+                gr.HTML('<div class="section-kicker">Step 02 · Match passports</div><h2 class="section-title">空间匹配护照</h2>')
+                summary = gr.Markdown("使用左侧默认案例，点击“开始匹配空间”。")
+                cards = gr.HTML('<section class="empty-passport"><b>等待第一次匹配</b><span>结果会说明推荐依据、证据状态和申请入口。</span></section>')
+                gr.HTML('<div class="section-kicker" style="margin-top:24px">Step 03 · Compare & prepare</div><h2 class="section-title">比较与申请准备</h2>')
+                compare_selector = gr.CheckboxGroup([], label="选择 2–3 个候选空间")
+                compare_button = gr.Button("生成横向比较")
+                comparison = gr.Markdown("选择 2–3 个候选后生成横向比较。")
+                checklist = gr.Markdown(build_application_checklist("已有 Demo"))
+                gr.HTML('<div class="boundary-note"><b>证据边界</b>：推荐分数仅用于本次候选排序，不代表入驻资格。只有载体资料明确写出的公开入口才会展示为入口；其余情况请联系运营方核验。</div>')
+
         state = gr.State({})
         run.click(
-            ui_analyze,
-            inputs=[title, text, source, mode, observed, use_ai],
-            outputs=[summary, evidence, draft, checklist, model_status, state, checks, gate],
+            ui_recommend,
+            inputs=[city, industry, stage, services, description],
+            outputs=[summary, cards, compare_selector, state, checklist, comparison],
         )
-        gr.Markdown("""
-        ---
-        **关于作品**：本届比赛版在活动期间发布的 VibeSocial 原创衍生能力上继续开发，复用既有 OPC Gate 的公开政策数据和领域方法；本次新增 ModelScope 创空间部署、API-Inference 适配、比赛专用运营工作流与材料。完整复用边界见仓库说明。
-        """)
+        compare_button.click(ui_compare, inputs=[compare_selector, state], outputs=comparison)
+        stage.change(build_application_checklist, inputs=stage, outputs=checklist)
     return demo
 
 
 def launch_demo():
     import gradio as gr
 
-    build_demo().launch(
-        theme=gr.themes.Soft(primary_hue="blue", secondary_hue="teal"),
-        css=CSS,
-    )
+    build_demo().launch(theme=gr.themes.Soft(primary_hue="emerald", secondary_hue="slate"), css=CSS)
 
 
 if __name__ == "__main__":

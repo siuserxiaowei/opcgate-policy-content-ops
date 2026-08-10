@@ -11,26 +11,26 @@
 
 ## 本届比赛版本
 
-- 产品：OPC Gate 政策内容运营助手
+- 产品：OPC Gate 空间匹配与申请助手
 - SDK：Gradio 6.17.3
 - 入口：`app.py`
-- 数据：125 条政策、42 个城市 / 适用范围、128 个载体样本
+- 数据：128 个载体（覆盖 38 个城市）及 125 条政策辅助证据
 - 数据快照：2026-05-22
 - ModelScope 创空间：<https://modelscope.cn/studios/siuser/opcgate-policy-content-ops>
 - GitHub 仓库：<https://github.com/siuserxiaowei/opcgate-policy-content-ops>
-- 本次部署源码对应 GitHub commit：`8f86842dab660ae5ad5b4964dd36a99b313e274f`
-- ModelScope 上传提交：`17ffeb6b`
+- 新版部署源码对应 GitHub commit：待本次推送后填写
+- ModelScope 新版上传提交：待本次推送后填写
 - 可见性：公开体验
 - 首次成功验收：2026-08-10 16:56 CST
 
 ## 自动化验证
 
-- Python 比赛版测试：11/11 通过；
+- Python 新版核心测试：12/12 通过；
+- `app.py` 覆盖率：82%；
 - 既有 JavaScript 回归测试：15/15 通过；
 - Gradio 本地 UI：已在 Gradio 6.17.3、桌面端和 390×844 手机视口验收；
-- ModelScope 正式环境：运行中；已在正式创空间跑通输入、规则分析、政策证据、分层草稿和发布门禁。
-- 无 Token 降级：已验证；页面明确显示“未配置 ModelScope Access Token，已保留可运行的规则草稿”。
-- 本次云端样例：识别 10 条政策线索，并展示来源、数据日期、原文链接与适用边界。
+- 本地新版：已跑通广州 AI 默认案例、空间匹配护照和申请入口边界；390×844 视口无横向溢出。
+- ModelScope 正式环境：当前仍是旧版，待推送后重新验收新版搜索、比较和申请清单。
 
 ## 本地 Gradio 截图证据
 
