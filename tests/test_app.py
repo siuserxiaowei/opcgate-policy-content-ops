@@ -1,6 +1,7 @@
 import importlib.util
 import os
 import unittest
+from unittest.mock import MagicMock, patch
 from pathlib import Path
 
 
@@ -11,6 +12,24 @@ SPEC.loader.exec_module(app)
 
 
 class ContestAppTests(unittest.TestCase):
+    def test_launch_demo_passes_gradio_6_options(self):
+        demo = MagicMock()
+        fake_gradio = MagicMock()
+        fake_theme = object()
+        fake_gradio.themes.Soft.return_value = fake_theme
+
+        with patch.dict("sys.modules", {"gradio": fake_gradio}), patch.object(app, "build_demo", return_value=demo):
+            app.launch_demo()
+
+        fake_gradio.themes.Soft.assert_called_once_with(primary_hue="blue", secondary_hue="teal")
+        demo.launch.assert_called_once_with(theme=fake_theme, css=app.CSS)
+
+    def test_mobile_css_constrains_gradio_root_and_tables(self):
+        self.assertIn("width:100% !important", app.CSS)
+        self.assertIn("min-width:0 !important", app.CSS)
+        self.assertIn(".gradio-container .table-wrap", app.CSS)
+        self.assertIn("overflow-x:auto !important", app.CSS)
+
     def setUp(self):
         self.topic = {
             "title": "AI 智能体创业者如何寻找落地政策",

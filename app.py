@@ -454,7 +454,9 @@ def ui_analyze(title: str, text: str, source_url: str, mode: str, observed_at: s
 
 
 CSS = """
-.gradio-container {max-width: 1240px !important; margin: 0 auto !important;}
+.gradio-container {width:100% !important; max-width:1240px !important; min-width:0 !important; margin:0 auto !important; overflow-x:hidden !important;}
+.gradio-container > .main, .gradio-container .contain, .gradio-container .tabs {width:100% !important; min-width:0 !important; max-width:100% !important;}
+.gradio-container .table-wrap {min-width:0 !important; max-width:100% !important; overflow-x:auto !important;}
 .hero {padding: 32px; border-radius: 24px; background: linear-gradient(135deg,#0f172a,#1e3a8a 68%,#0f766e); color:#fff; box-shadow:0 24px 70px rgba(15,23,42,.16)}
 .hero h1 {font-size:42px; line-height:1.12; margin:10px 0 14px}
 .hero p {font-size:17px; color:#dbeafe; max-width:850px}
@@ -543,8 +545,14 @@ def build_demo():
     return demo
 
 
-if __name__ == "__main__":
+def launch_demo():
+    import gradio as gr
+
     build_demo().launch(
         theme=gr.themes.Soft(primary_hue="blue", secondary_hue="teal"),
         css=CSS,
     )
+
+
+if __name__ == "__main__":
+    launch_demo()
